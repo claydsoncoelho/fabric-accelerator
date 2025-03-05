@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "Master Level1 Trans"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "f09bc1ae-079a-b0e9-4471-5f57b721d522"
+  }
+}
