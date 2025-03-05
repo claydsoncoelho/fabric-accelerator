@@ -17,4 +17,11 @@ A group of SQL Scrips that you must run in WH_Control Warehouse to deploy WH_Con
 
 Follow these steps to setup Microsoft Fabric Accelerator:
 
-1. Create an Azure DevOps repo and upload the content of Fabric_Workspace to it.
+1. In Azure DevOps, create a repo and upload the content of **Fabric_Workspace** folder to it.
+
+2. In Fabric, create a connectiou to the source system and take note of the Connetion ID. You will need it later.
+
+3. Create a Fabric Lakehouse to be be the landing zone (bronze layer) of the Data Platform. Take note of the Connetion ID. You will need it later.
+
+4. Set up the WH_Control Warehouse objects: In the **WH_Control_Deployment** folder, there are to folders with SQL scripts, Tabes and Stored Procedures. Open a query in WH_Control Warehouse and execute all scripts.
+
