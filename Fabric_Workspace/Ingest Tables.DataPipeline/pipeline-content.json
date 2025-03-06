@@ -68,14 +68,14 @@
           }
         },
         "linkedService": {
-          "name": "WH_Control",
+          "name": "329fa80e_2398_4aed_be43_bb2a62e9256c",
           "properties": {
             "annotations": [],
             "type": "DataWarehouse",
             "typeProperties": {
-              "endpoint": "32ebfjmbw6zuhftgkc2b6qekfm-bgoon2webxcu5alqfxtuqp6lpu.datawarehouse.fabric.microsoft.com",
-              "artifactId": "4937c3cc-bd8a-466d-97e9-8cb2ee745b36",
-              "workspaceId": "eae69c09-0dc4-4ec5-8170-2de7483fcb7d"
+              "endpoint": "@pipeline().parameters.WH_Conrol_Conn_String",
+              "artifactId": "@pipeline().parameters.WH_Conrol_Name",
+              "workspaceId": "@pipeline().parameters.BronzeWorkspaceID"
             }
           }
         }
@@ -293,14 +293,14 @@
           }
         },
         "linkedService": {
-          "name": "WH_Control",
+          "name": "48f848f7_91fa_44e2_8de9_1782bc7cdc3e",
           "properties": {
             "annotations": [],
             "type": "DataWarehouse",
             "typeProperties": {
-              "endpoint": "32ebfjmbw6zuhftgkc2b6qekfm-bgoon2webxcu5alqfxtuqp6lpu.datawarehouse.fabric.microsoft.com",
-              "artifactId": "4937c3cc-bd8a-466d-97e9-8cb2ee745b36",
-              "workspaceId": "eae69c09-0dc4-4ec5-8170-2de7483fcb7d"
+              "endpoint": "@pipeline().parameters.WH_Conrol_Conn_String",
+              "artifactId": "@pipeline().parameters.WH_Conrol_Name",
+              "workspaceId": "@pipeline().parameters.BronzeWorkspaceID"
             }
           }
         }
@@ -348,14 +348,14 @@
           }
         },
         "linkedService": {
-          "name": "WH_Control",
+          "name": "4c30be0e_8fa9_4aa5_b09d_053b2ccbfb99",
           "properties": {
             "annotations": [],
             "type": "DataWarehouse",
             "typeProperties": {
-              "endpoint": "32ebfjmbw6zuhftgkc2b6qekfm-bgoon2webxcu5alqfxtuqp6lpu.datawarehouse.fabric.microsoft.com",
-              "artifactId": "4937c3cc-bd8a-466d-97e9-8cb2ee745b36",
-              "workspaceId": "eae69c09-0dc4-4ec5-8170-2de7483fcb7d"
+              "endpoint": "@pipeline().parameters.WH_Conrol_Conn_String",
+              "artifactId": "@pipeline().parameters.WH_Conrol_Name",
+              "workspaceId": "@pipeline().parameters.BronzeWorkspaceID"
             }
           }
         }
@@ -404,14 +404,14 @@
           "datasetSettings": {
             "annotations": [],
             "linkedService": {
-              "name": "WH_Control",
+              "name": "b2d72274_c015_463d_b206_699df8cf2910",
               "properties": {
                 "annotations": [],
                 "type": "DataWarehouse",
                 "typeProperties": {
-                  "endpoint": "32ebfjmbw6zuhftgkc2b6qekfm-bgoon2webxcu5alqfxtuqp6lpu.datawarehouse.fabric.microsoft.com",
-                  "artifactId": "4937c3cc-bd8a-466d-97e9-8cb2ee745b36",
-                  "workspaceId": "eae69c09-0dc4-4ec5-8170-2de7483fcb7d"
+                  "endpoint": "@pipeline().parameters.WH_Conrol_Conn_String",
+                  "artifactId": "@pipeline().parameters.WH_Conrol_Name",
+                  "workspaceId": "@pipeline().parameters.BronzeWorkspaceID"
                 }
               }
             },
@@ -611,14 +611,14 @@
                 }
               },
               "linkedService": {
-                "name": "WH_Control",
+                "name": "614ac7b2_860c_4ddb_a126_9bcc0e0fe8ee",
                 "properties": {
                   "annotations": [],
                   "type": "DataWarehouse",
                   "typeProperties": {
-                    "endpoint": "32ebfjmbw6zuhftgkc2b6qekfm-bgoon2webxcu5alqfxtuqp6lpu.datawarehouse.fabric.microsoft.com",
-                    "artifactId": "4937c3cc-bd8a-466d-97e9-8cb2ee745b36",
-                    "workspaceId": "eae69c09-0dc4-4ec5-8170-2de7483fcb7d"
+                    "endpoint": "@pipeline().parameters.WH_Conrol_Conn_String",
+                    "artifactId": "@pipeline().parameters.WH_Conrol_Name",
+                    "workspaceId": "@pipeline().parameters.BronzeWorkspaceID"
                   }
                 }
               }
@@ -676,14 +676,14 @@
           }
         },
         "linkedService": {
-          "name": "WH_Control",
+          "name": "fb74f856_e6cd_4423_b2ba_354991d4722f",
           "properties": {
             "annotations": [],
             "type": "DataWarehouse",
             "typeProperties": {
-              "endpoint": "32ebfjmbw6zuhftgkc2b6qekfm-bgoon2webxcu5alqfxtuqp6lpu.datawarehouse.fabric.microsoft.com",
-              "artifactId": "4937c3cc-bd8a-466d-97e9-8cb2ee745b36",
-              "workspaceId": "eae69c09-0dc4-4ec5-8170-2de7483fcb7d"
+              "endpoint": "@pipeline().parameters.WH_Conrol_Conn_String",
+              "artifactId": "@pipeline().parameters.WH_Conrol_Name",
+              "workspaceId": "@pipeline().parameters.BronzeWorkspaceID"
             }
           }
         }
@@ -809,6 +809,12 @@
       "BronzeWorkspaceID": {
         "type": "string",
         "defaultValue": "c5a446d5-a746-47ea-94a1-d74b3faa71b0"
+      },
+      "WH_Conrol_Name": {
+        "type": "string"
+      },
+      "WH_Conrol_Conn_String": {
+        "type": "string"
       }
     },
     "variables": {

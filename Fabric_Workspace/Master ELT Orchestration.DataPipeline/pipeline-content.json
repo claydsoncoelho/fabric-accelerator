@@ -34,13 +34,13 @@
             "type": "DataWarehouseTable",
             "schema": [],
             "linkedService": {
-              "name": "WH_Control",
+              "name": "aa8e4e98_f537_4970_8dbc_89b2f263ceec",
               "properties": {
                 "type": "DataWarehouse",
                 "typeProperties": {
-                  "artifactId": "4937c3cc-bd8a-466d-97e9-8cb2ee745b36",
-                  "endpoint": "32ebfjmbw6zuhftgkc2b6qekfm-bgoon2webxcu5alqfxtuqp6lpu.datawarehouse.fabric.microsoft.com",
-                  "workspaceId": "eae69c09-0dc4-4ec5-8170-2de7483fcb7d"
+                  "artifactId": "@pipeline().parameters.WH_Conrol_Name",
+                  "endpoint": "@pipeline().parameters.WH_Conrol_Conn_String",
+                  "workspaceId": "@pipeline().parameters.BronzeWorkspaceID"
                 },
                 "annotations": []
               }
@@ -200,6 +200,14 @@
                   "BronzeWorkspaceID": {
                     "value": "@pipeline().parameters.BronzeWorkspaceID",
                     "type": "Expression"
+                  },
+                  "WH_Conrol_Name": {
+                    "value": "@pipeline().parameters.WH_Conrol_Name",
+                    "type": "Expression"
+                  },
+                  "WH_Conrol_Conn_String": {
+                    "value": "@pipeline().parameters.WH_Conrol_Conn_String",
+                    "type": "Expression"
                   }
                 },
                 "waitOnCompletion": true
@@ -243,7 +251,18 @@
               "value": "@pipeline().parameters.DelayTransformation",
               "type": "Expression"
             },
-            "BronzeWorkspaceID": "@pipeline().parameters.BronzeWorkspaceID"
+            "BronzeWorkspaceID": {
+              "value": "@pipeline().parameters.BronzeWorkspaceID",
+              "type": "Expression"
+            },
+            "WH_Conrol_Name": {
+              "value": "@pipeline().parameters.WH_Conrol_Name",
+              "type": "Expression"
+            },
+            "WH_Conrol_Conn_String": {
+              "value": "@pipeline().parameters.WH_Conrol_Conn_String",
+              "type": "Expression"
+            }
           },
           "waitOnCompletion": true
         },
@@ -280,6 +299,22 @@
       "BronzeWorkspaceID": {
         "type": "string",
         "defaultValue": "eae69c09-0dc4-4ec5-8170-2de7483fcb7d"
+      },
+      "WH_Conrol_Name": {
+        "type": "string",
+        "defaultValue": "WH_Control"
+      },
+      "WH_Conrol_Conn_String": {
+        "type": "string",
+        "defaultValue": "32ebfjmbw6zuhftgkc2b6qekfm-bgoon2webxcu5alqfxtuqp6lpu.datawarehouse.fabric.microsoft.com"
+      }
+    },
+    "variables": {
+      "number": {
+        "type": "Integer"
+      },
+      "numbers": {
+        "type": "String"
       }
     }
   }

@@ -67,14 +67,14 @@
           }
         },
         "linkedService": {
-          "name": "WH_Control",
+          "name": "eadfa772_967d_4c7d_8642_601200995573",
           "properties": {
             "annotations": [],
             "type": "DataWarehouse",
             "typeProperties": {
-              "endpoint": "32ebfjmbw6zuhftgkc2b6qekfm-bgoon2webxcu5alqfxtuqp6lpu.datawarehouse.fabric.microsoft.com",
-              "artifactId": "4937c3cc-bd8a-466d-97e9-8cb2ee745b36",
-              "workspaceId": "eae69c09-0dc4-4ec5-8170-2de7483fcb7d"
+              "endpoint": "@pipeline().parameters.WH_Conrol_Conn_String",
+              "artifactId": "@pipeline().parameters.WH_Conrol_Name",
+              "workspaceId": "@pipeline().parameters.BronzeWorkspaceID"
             }
           }
         }
@@ -358,14 +358,14 @@
           }
         },
         "linkedService": {
-          "name": "WH_Control",
+          "name": "8de91aad_789c_4f30_88db_49641a88c793",
           "properties": {
             "annotations": [],
             "type": "DataWarehouse",
             "typeProperties": {
-              "endpoint": "32ebfjmbw6zuhftgkc2b6qekfm-bgoon2webxcu5alqfxtuqp6lpu.datawarehouse.fabric.microsoft.com",
-              "artifactId": "4937c3cc-bd8a-466d-97e9-8cb2ee745b36",
-              "workspaceId": "eae69c09-0dc4-4ec5-8170-2de7483fcb7d"
+              "endpoint": "@pipeline().parameters.WH_Conrol_Conn_String",
+              "artifactId": "@pipeline().parameters.WH_Conrol_Name",
+              "workspaceId": "@pipeline().parameters.BronzeWorkspaceID"
             }
           }
         }
@@ -489,14 +489,14 @@
           }
         },
         "linkedService": {
-          "name": "WH_Control",
+          "name": "b64e4447_736b_4c9e_8ea3_bbd8b7454f55",
           "properties": {
             "annotations": [],
             "type": "DataWarehouse",
             "typeProperties": {
-              "endpoint": "32ebfjmbw6zuhftgkc2b6qekfm-bgoon2webxcu5alqfxtuqp6lpu.datawarehouse.fabric.microsoft.com",
-              "artifactId": "4937c3cc-bd8a-466d-97e9-8cb2ee745b36",
-              "workspaceId": "eae69c09-0dc4-4ec5-8170-2de7483fcb7d"
+              "endpoint": "@pipeline().parameters.WH_Conrol_Conn_String",
+              "artifactId": "@pipeline().parameters.WH_Conrol_Name",
+              "workspaceId": "@pipeline().parameters.BronzeWorkspaceID"
             }
           }
         }
@@ -612,6 +612,12 @@
         "type": "string"
       },
       "BronzeWorkspaceID": {
+        "type": "string"
+      },
+      "WH_Conrol_Name": {
+        "type": "string"
+      },
+      "WH_Conrol_Conn_String": {
         "type": "string"
       }
     },

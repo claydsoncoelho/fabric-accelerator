@@ -32,14 +32,14 @@ Follow these steps to setup Microsoft Fabric Accelerator:
 7. Open **Ingest Tables** Pipeline, go to **Copy Source to Lakehouse** Activity, then to **Source** tab and replace the Connection by the connection to the source system that you've just created. Also fix all broken connection to WH_Control, taking care to keep the stored procedures names and parameters.
 
 8. Open **EnvSettings** Notebook and change the folowing variables:
- - bronzeWorkspaceId: The Workspace ID.
- - bronzeLakehouseName: The name of the landing zone (bronze) Lakehouse.
+ - **bronzeWorkspaceId:** The Workspace ID.
+ - **bronzeLakehouseName:** The name of the landing zone (bronze) Lakehouse.
 
 9. Open **Master ELT Orchestration** Pipeline, got to Parameters tab, and change the follwoing parameters. Also fix all broken connection to WH_Control, taking care to keep the stored procedures names and parameters.:
- - SourceSystemName: Source system name (The same that you used to populate **WH_Control.ELT.IngestDefinition** on step 4.).
- - StreamName: Leave it blank to process all tables defined in **WH_Control.ELT.IngestDefinition**.
- - DelayTransformation: 0
- - BronzeObjectID: The landing zone (bronze) Lakehouse ID.
- - BronzeWorkspaceID: The Workspace ID.
+ - **SourceSystemName:** Source system name (The same that you used to populate **WH_Control.ELT.IngestDefinition** on step 4.).
+ - **StreamName:** Leave it blank to process all tables defined in **WH_Control.ELT.IngestDefinition**.
+ - **DelayTransformation:** 0
+ - **BronzeObjectID:** The landing zone (bronze) Lakehouse ID.
+ - **BronzeWorkspaceID:** The Workspace ID.
 
 10. Execute **Master ELT Orchestration** Pipeline to test it.

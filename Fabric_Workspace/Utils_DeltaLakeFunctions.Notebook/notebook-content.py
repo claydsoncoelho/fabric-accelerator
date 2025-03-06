@@ -294,6 +294,7 @@ def insertDelta (df, tableName, writeMode="append"):
 
     # Creating a delta table with schema name not supported at the time of writing this code, so replacing schema name with "_". To be commented out when this
     #feature is available
+    #https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-schemas#public-preview-limitations
     tableName = tableName.replace(".","_")
     
     #Get delta table reference
@@ -345,6 +346,7 @@ def upsertDelta(df,tableName,keyColumns,watermarkColumn=None):
 
     # Creating a delta table with schema name not supported at the time of writing this code, so replacing schema name with "_". To be commented out when this
     #feature is available
+    #https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-schemas#public-preview-limitations
     tableName = tableName.replace(".","_")
 
     #Get target table reference

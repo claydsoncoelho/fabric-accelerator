@@ -8,9 +8,8 @@
 # META   },
 # META   "dependencies": {
 # META     "lakehouse": {
-# META       "default_lakehouse": "b0153702-14e7-4a98-be5b-fd623929a5a4",
-# META       "default_lakehouse_name": "LH_Bronze",
-# META       "default_lakehouse_workspace_id": "eae69c09-0dc4-4ec5-8170-2de7483fcb7d"
+# META       "default_lakehouse_name": "",
+# META       "default_lakehouse_workspace_id": ""
 # META     }
 # META   }
 # META }
@@ -109,26 +108,26 @@ WatermarkColName = None
 # WatermarkColName = 'LastEditedWhen'
 
 
-# L1TransformInstanceID = 1
-# L1TransformID = 1
-# IngestID = 1
+# L1TransformInstanceID = 2
+# L1TransformID = 2
+# IngestID = 2
 # CustomParameters = None
 # InputRawFileSystem = "Files"
-# InputRawFileFolder = "raw-bronze/wwi/Customers/1900-01"
-# InputRawFile = "Customers_1900-01-01_000000.parquet"
+# InputRawFileFolder = "raw_bronze/wwi/dbo/OrderLines/1900-01"
+# InputRawFile = "dbo_OrderLines_1900-01-01_000000.parquet"
 # InputRawFileDelimiter = None
-# InputFileHeaderFlag = False
-# OutputL1CurateFileSystem = None
-# OutputL1CuratedFolder = None
-# OutputL1CuratedFile = None
+# InputFileHeaderFlag = None
+# OutputL1CurateFileSystem = "Not Applicable"
+# OutputL1CuratedFolder = "Not Applicable"
+# OutputL1CuratedFile = "Not Applicable"
 # OutputL1CuratedFileDelimiter = None
 # OutputL1CuratedFileFormat = None
 # OutputL1CuratedFileWriteMode = None
 # OutputDWStagingTable = None
-# LookupColumns = "CustomerID"
-# OutputDWTable = "silver.Customers"
+# LookupColumns = "OrderLineID"
+# OutputDWTable = "OrderLines"
 # OutputDWTableWriteMode = "append"
-# ReRunL1TransformFlag = False
+# ReRunL1TransformFlag = None
 # DeltaName = None
 
 

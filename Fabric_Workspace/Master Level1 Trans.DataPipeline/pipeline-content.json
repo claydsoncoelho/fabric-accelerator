@@ -44,13 +44,13 @@
             "type": "DataWarehouseTable",
             "schema": [],
             "linkedService": {
-              "name": "WH_Control",
+              "name": "87ca15b9_ada9_4045_86c0_c6e741039d8d",
               "properties": {
                 "type": "DataWarehouse",
                 "typeProperties": {
-                  "artifactId": "4937c3cc-bd8a-466d-97e9-8cb2ee745b36",
-                  "endpoint": "32ebfjmbw6zuhftgkc2b6qekfm-bgoon2webxcu5alqfxtuqp6lpu.datawarehouse.fabric.microsoft.com",
-                  "workspaceId": "eae69c09-0dc4-4ec5-8170-2de7483fcb7d"
+                  "artifactId": "@pipeline().parameters.WH_Conrol_Name",
+                  "endpoint": "@pipeline().parameters.WH_Conrol_Conn_String",
+                  "workspaceId": "@pipeline().parameters.BronzeWorkspaceID"
                 },
                 "annotations": []
               }
@@ -182,7 +182,18 @@
                     "value": "@item().WatermarkColName",
                     "type": "Expression"
                   },
-                  "BronzeWorkspaceID": "@pipeline().parameters.BronzeWorkspaceID"
+                  "BronzeWorkspaceID": {
+                    "value": "@pipeline().parameters.BronzeWorkspaceID",
+                    "type": "Expression"
+                  },
+                  "WH_Conrol_Name": {
+                    "value": "@pipeline().parameters.WH_Conrol_Name",
+                    "type": "Expression"
+                  },
+                  "WH_Conrol_Conn_String": {
+                    "value": "@pipeline().parameters.WH_Conrol_Conn_String",
+                    "type": "Expression"
+                  }
                 },
                 "waitOnCompletion": true
               },
@@ -222,6 +233,12 @@
         "defaultValue": 0
       },
       "BronzeWorkspaceID": {
+        "type": "string"
+      },
+      "WH_Conrol_Name": {
+        "type": "string"
+      },
+      "WH_Conrol_Conn_String": {
         "type": "string"
       }
     }
