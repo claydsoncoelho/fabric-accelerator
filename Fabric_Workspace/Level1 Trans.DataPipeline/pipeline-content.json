@@ -72,9 +72,9 @@
             "annotations": [],
             "type": "DataWarehouse",
             "typeProperties": {
-              "endpoint": "32ebfjmbw6zuhftgkc2b6qekfm-2vdkjrkgu7vepffb25ft7ktrwa.datawarehouse.fabric.microsoft.com",
-              "artifactId": "215d9bf6-8b13-4210-b093-74ae1f132b0e",
-              "workspaceId": "c5a446d5-a746-47ea-94a1-d74b3faa71b0"
+              "endpoint": "32ebfjmbw6zuhftgkc2b6qekfm-bgoon2webxcu5alqfxtuqp6lpu.datawarehouse.fabric.microsoft.com",
+              "artifactId": "4937c3cc-bd8a-466d-97e9-8cb2ee745b36",
+              "workspaceId": "eae69c09-0dc4-4ec5-8170-2de7483fcb7d"
             }
           }
         }
@@ -102,7 +102,10 @@
             "value": "@pipeline().parameters.ComputeName",
             "type": "Expression"
           },
-          "workspaceId": "c5a446d5-a746-47ea-94a1-d74b3faa71b0",
+          "workspaceId": {
+            "value": "@pipeline().parameters.BronzeWorkspaceID",
+            "type": "Expression"
+          },
           "parameters": {
             "L1TransformInstanceID": {
               "value": {
@@ -360,9 +363,9 @@
             "annotations": [],
             "type": "DataWarehouse",
             "typeProperties": {
-              "endpoint": "32ebfjmbw6zuhftgkc2b6qekfm-2vdkjrkgu7vepffb25ft7ktrwa.datawarehouse.fabric.microsoft.com",
-              "artifactId": "215d9bf6-8b13-4210-b093-74ae1f132b0e",
-              "workspaceId": "c5a446d5-a746-47ea-94a1-d74b3faa71b0"
+              "endpoint": "32ebfjmbw6zuhftgkc2b6qekfm-bgoon2webxcu5alqfxtuqp6lpu.datawarehouse.fabric.microsoft.com",
+              "artifactId": "4937c3cc-bd8a-466d-97e9-8cb2ee745b36",
+              "workspaceId": "eae69c09-0dc4-4ec5-8170-2de7483fcb7d"
             }
           }
         }
@@ -491,9 +494,9 @@
             "annotations": [],
             "type": "DataWarehouse",
             "typeProperties": {
-              "endpoint": "32ebfjmbw6zuhftgkc2b6qekfm-2vdkjrkgu7vepffb25ft7ktrwa.datawarehouse.fabric.microsoft.com",
-              "artifactId": "215d9bf6-8b13-4210-b093-74ae1f132b0e",
-              "workspaceId": "c5a446d5-a746-47ea-94a1-d74b3faa71b0"
+              "endpoint": "32ebfjmbw6zuhftgkc2b6qekfm-bgoon2webxcu5alqfxtuqp6lpu.datawarehouse.fabric.microsoft.com",
+              "artifactId": "4937c3cc-bd8a-466d-97e9-8cb2ee745b36",
+              "workspaceId": "eae69c09-0dc4-4ec5-8170-2de7483fcb7d"
             }
           }
         }
@@ -606,6 +609,9 @@
         "defaultValue": 3
       },
       "WatermarkColName": {
+        "type": "string"
+      },
+      "BronzeWorkspaceID": {
         "type": "string"
       }
     },

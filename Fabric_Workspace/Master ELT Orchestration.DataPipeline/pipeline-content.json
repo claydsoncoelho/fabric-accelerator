@@ -38,9 +38,9 @@
               "properties": {
                 "type": "DataWarehouse",
                 "typeProperties": {
-                  "artifactId": "215d9bf6-8b13-4210-b093-74ae1f132b0e",
-                  "endpoint": "32ebfjmbw6zuhftgkc2b6qekfm-2vdkjrkgu7vepffb25ft7ktrwa.datawarehouse.fabric.microsoft.com",
-                  "workspaceId": "c5a446d5-a746-47ea-94a1-d74b3faa71b0"
+                  "artifactId": "4937c3cc-bd8a-466d-97e9-8cb2ee745b36",
+                  "endpoint": "32ebfjmbw6zuhftgkc2b6qekfm-bgoon2webxcu5alqfxtuqp6lpu.datawarehouse.fabric.microsoft.com",
+                  "workspaceId": "eae69c09-0dc4-4ec5-8170-2de7483fcb7d"
                 },
                 "annotations": []
               }
@@ -242,7 +242,8 @@
             "DelayL1TransformationFlag": {
               "value": "@pipeline().parameters.DelayTransformation",
               "type": "Expression"
-            }
+            },
+            "BronzeWorkspaceID": "@pipeline().parameters.BronzeWorkspaceID"
           },
           "waitOnCompletion": true
         },
@@ -274,11 +275,11 @@
       },
       "BronzeObjectID": {
         "type": "string",
-        "defaultValue": "c5989c50-bf8f-4cce-8f43-84174316cdcf"
+        "defaultValue": "b0153702-14e7-4a98-be5b-fd623929a5a4"
       },
       "BronzeWorkspaceID": {
         "type": "string",
-        "defaultValue": "c5a446d5-a746-47ea-94a1-d74b3faa71b0"
+        "defaultValue": "eae69c09-0dc4-4ec5-8170-2de7483fcb7d"
       }
     }
   }

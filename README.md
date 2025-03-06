@@ -23,23 +23,23 @@ Follow these steps to setup Microsoft Fabric Accelerator:
 
 3. Create a Fabric Lakehouse to be be the landing zone (bronze layer) of the Data Platform. Take note of the Connetion ID. You will need it later.
 
-4. Open **L1Transform-Generic-Fabric** Notebook and attach it to the bronze Lakehouse that you've just created.
+4. Open **L1Transform-Generic-Fabric** Notebook and attach it to the bronze Lakehouse that you've just created. Also, take note of the Notebook ID. You will need it later.
 
-5. In WH_Control, populate the **WH_Control.ELT.IngestDefinition** and **WH_Control.ELT.L1TransformDefinition** tables with metadata about the source tables that want to ingest into the landing zone. You can use the scripts in **WH_Control_Help** to help you. **Atention**: ELT.L1TransformDefinition.ComputeName must be the L1Transform-Generic-Fabric Notebook ID.
+5. Open **WH_Control** Warehouse, populate the **WH_Control.ELT.IngestDefinition** and **WH_Control.ELT.L1TransformDefinition** tables with metadata about the source tables that want to ingest into the landing zone. You can use the scripts in **WH_Control_Help** to help you. **Atention**: ELT.L1TransformDefinition.ComputeName must be the L1Transform-Generic-Fabric Notebook ID.
 
 6. Create a connection to the source system.
 
-7. Open **Ingest Tables** Pipeline, go to **Copy Source to Lakehouse** Activity, then to **Source** tab and replace the Connection by the connection to the source system that you've just created.
+7. Open **Ingest Tables** Pipeline, go to **Copy Source to Lakehouse** Activity, then to **Source** tab and replace the Connection by the connection to the source system that you've just created. Also fix all broken connection to WH_Control, taking care to keep the stored procedures names and parameters.
 
-8. Open **Master ELT Orchestration** Pipeline, got to Parameters tab, and change the follwoing parameters:
+8. Open **EnvSettings** Notebook and change the folowing variables:
+ - bronzeWorkspaceId: The Workspace ID.
+ - bronzeLakehouseName: The name of the landing zone (bronze) Lakehouse.
+
+9. Open **Master ELT Orchestration** Pipeline, got to Parameters tab, and change the follwoing parameters. Also fix all broken connection to WH_Control, taking care to keep the stored procedures names and parameters.:
  - SourceSystemName: Source system name (The same that you used to populate **WH_Control.ELT.IngestDefinition** on step 4.).
  - StreamName: Leave it blank to process all tables defined in **WH_Control.ELT.IngestDefinition**.
  - DelayTransformation: 0
  - BronzeObjectID: The landing zone (bronze) Lakehouse ID.
  - BronzeWorkspaceID: The Workspace ID.
-
-9. Open **EnvSettings** Notebook and change the folowing variables:
- - bronzeWorkspaceId: The Workspace ID.
- - bronzeLakehouseName: The name of the landing zone (bronze) Lakehouse.
 
 10. Execute **Master ELT Orchestration** Pipeline to test it.

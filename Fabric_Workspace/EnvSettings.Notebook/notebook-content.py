@@ -17,10 +17,10 @@
 # CELL ********************
 
 # Fabric Workspace ID for the Bronze medallion layer
-bronzeWorkspaceId = "c5a446d5-a746-47ea-94a1-d74b3faa71b0"
+bronzeWorkspaceId = "eae69c09-0dc4-4ec5-8170-2de7483fcb7d"
 
 # Bronze Lakehouse name. Set to None if not applicable.
-bronzeLakehouseName = "lh_bronze"
+bronzeLakehouseName = "LH_Bronze"
 
 # Bronze data warehouse name. Set to None if not applicable.
 bronzeDatawarehouseName = None
