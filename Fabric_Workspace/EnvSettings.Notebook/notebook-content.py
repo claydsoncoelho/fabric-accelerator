@@ -26,22 +26,22 @@ bronzeLakehouseName = "lh_bronze"
 bronzeDatawarehouseName = None
 
 # Fabric Workspace ID for the Silver medallion layer. Use the same ID if all medallion layers are in the same workspace.
-silverWorkspaceId = "c5a446d5-a746-47ea-94a1-d74b3faa71b0"
+silverWorkspaceId = None
 
 # Silver Lakehouse name. Set to None if not applicable.
-silverLakehouseName = "lh_silver"
+silverLakehouseName = None
 
 # Silver data warehouse name. Set to None if not applicable.
 silverDatawarehouseName = None
 
 # Fabric Workspace ID for the Gold medallion layer. Use the same ID if all medallion layers are in the same workspace.
-goldWorkspaceId = "c5a446d5-a746-47ea-94a1-d74b3faa71b0"
+goldWorkspaceId = None
 
 # Gold Lakehouse name. Set to None if not applicable.
 goldLakehouseName = None
 
 # Gold data warehouse name. Set to None if not applicable.
-goldDatawarehouseName = "dw_gold"
+goldDatawarehouseName = None
 
 # METADATA ********************
 

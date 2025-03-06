@@ -242,14 +242,6 @@
             "DelayL1TransformationFlag": {
               "value": "@pipeline().parameters.DelayTransformation",
               "type": "Expression"
-            },
-            "SilverObjectID": {
-              "value": "@pipeline().parameters.SilverObjectID",
-              "type": "Expression"
-            },
-            "SilverWorkspaceID": {
-              "value": "@pipeline().parameters.SilverWorkspaceID",
-              "type": "Expression"
             }
           },
           "waitOnCompletion": true
@@ -287,23 +279,6 @@
       "BronzeWorkspaceID": {
         "type": "string",
         "defaultValue": "c5a446d5-a746-47ea-94a1-d74b3faa71b0"
-      },
-      "SilverObjectID": {
-        "type": "string",
-        "defaultValue": "a2b4a4f3-a962-43e4-9a0d-005f14339e69"
-      },
-      "SilverWorkspaceID": {
-        "type": "string",
-        "defaultValue": "c5a446d5-a746-47ea-94a1-d74b3faa71b0"
-      },
-      "GoldObjectID": {
-        "type": "string"
-      },
-      "GoldWorkspaceID": {
-        "type": "string"
-      },
-      "GoldDWEndpoint": {
-        "type": "string"
       }
     }
   }

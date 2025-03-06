@@ -10,19 +10,31 @@
             "storedProcedureParameters": {
               "DelayL1TransformationFlag": {
                 "type": "Int32",
-                "value": "@pipeline().parameters.DelayL1TransformationFlag"
+                "value": {
+                  "value": "@pipeline().parameters.DelayL1TransformationFlag",
+                  "type": "Expression"
+                }
               },
               "MaxTransformInstance": {
                 "type": "Int32",
-                "value": "@pipeline().parameters.MaxTransformInstance"
+                "value": {
+                  "value": "@pipeline().parameters.MaxTransformInstance",
+                  "type": "Expression"
+                }
               },
               "SourceSystemName": {
                 "type": "String",
-                "value": "@pipeline().parameters.SourceSystemName"
+                "value": {
+                  "value": "@pipeline().parameters.SourceSystemName",
+                  "type": "Expression"
+                }
               },
               "StreamName": {
                 "type": "String",
-                "value": "@pipeline().parameters.StreamName"
+                "value": {
+                  "value": "@pipeline().parameters.StreamName",
+                  "type": "Expression"
+                }
               }
             },
             "partitionOption": "None",
@@ -169,14 +181,6 @@
                   "WatermarkColName": {
                     "value": "@item().WatermarkColName",
                     "type": "Expression"
-                  },
-                  "SilverObjectID": {
-                    "value": "@pipeline().parameters.SilverObjectID",
-                    "type": "Expression"
-                  },
-                  "SilverWorkspaceID": {
-                    "value": "@pipeline().parameters.SilverWorkspaceID",
-                    "type": "Expression"
                   }
                 },
                 "waitOnCompletion": true
@@ -215,14 +219,6 @@
       "DelayL1TransformationFlag": {
         "type": "int",
         "defaultValue": 0
-      },
-      "SilverObjectID": {
-        "type": "string",
-        "defaultValue": "a2b4a4f3-a962-43e4-9a0d-005f14339e69"
-      },
-      "SilverWorkspaceID": {
-        "type": "string",
-        "defaultValue": "c5a446d5-a746-47ea-94a1-d74b3faa71b0"
       }
     }
   }

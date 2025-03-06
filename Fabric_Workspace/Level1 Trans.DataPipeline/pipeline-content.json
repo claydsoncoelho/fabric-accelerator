@@ -607,14 +607,6 @@
       },
       "WatermarkColName": {
         "type": "string"
-      },
-      "SilverObjectID": {
-        "type": "string",
-        "defaultValue": "a2b4a4f3-a962-43e4-9a0d-005f14339e69"
-      },
-      "SilverWorkspaceID": {
-        "type": "string",
-        "defaultValue": "c5a446d5-a746-47ea-94a1-d74b3faa71b0"
       }
     },
     "variables": {
