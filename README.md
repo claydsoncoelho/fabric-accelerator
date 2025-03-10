@@ -25,11 +25,12 @@ Follow these steps to setup Microsoft Fabric Accelerator:
 
 4. Open **L1Transform-Generic-Fabric** Notebook and attach it to the bronze Lakehouse that you've just created. Also, take note of the Notebook ID. You will need it later.
 
-5. Open **WH_Control** Warehouse, populate the **WH_Control.ELT.IngestDefinition** and **WH_Control.ELT.L1TransformDefinition** tables with metadata about the source tables that want to ingest into the landing zone. You can use the scripts in **WH_Control_Help** to help you. **Atention**: ELT.L1TransformDefinition.ComputeName must be the L1Transform-Generic-Fabric Notebook ID.
+5. Open **WH_Control** Warehouse, populate the **WH_Control.ELT.IngestDefinition** and **WH_Control.ELT.L1TransformDefinition** tables with metadata about the source tables that want to ingest into the landing zone. You can use the scripts in **WH_Control_Help** to help you. 
+**Atention**: ELT.L1TransformDefinition.ComputeName must be the L1Transform-Generic-Fabric Notebook ID.
 
 6. Create a connection to the source system.
 
-7. Open **Ingest Tables** Pipeline, go to **Copy Source to Lakehouse** Activity, then to **Source** tab and replace the Connection by the connection to the source system that you've just created. Also fix all broken connection to WH_Control, taking care to keep the stored procedures names and parameters.
+7. Open **Ingest Tables** Pipeline, go to **Copy Source to Lakehouse** Activity, then to **Source** tab and replace the Connection by the connection to the source system that you've just created. Keep the **Query** value (@pipeline().parameters.SourceSQL). Do the same thing with **Ge High Watermark** Activity. Keep the **Query** value (@pipeline().parameters.StatSQL).
 
 8. Open **EnvSettings** Notebook and change the folowing variables:
     - **bronzeWorkspaceId:** The Workspace ID.

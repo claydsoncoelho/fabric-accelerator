@@ -116,20 +116,27 @@
         },
         "typeProperties": {
           "source": {
-            "type": "SqlMISource",
-            "sqlReaderQuery": {
-              "value": "@pipeline().parameters.SourceSQL",
-              "type": "Expression"
-            },
+            "type": "DataWarehouseSource",
+            "sqlReaderQuery": "@pipeline().parameters.SourceSQL",
+            "queryTimeout": "02:00:00",
             "partitionOption": "None",
             "datasetSettings": {
               "annotations": [],
-              "type": "AzureSqlTable",
+              "linkedService": {
+                "name": "4ba18714_66f6_4eb5_a513_bfee00282dac",
+                "properties": {
+                  "annotations": [],
+                  "type": "DataWarehouse",
+                  "typeProperties": {
+                    "endpoint": "@pipeline().parameters.WH_Conrol_Conn_String",
+                    "artifactId": "'replace_source_connection'",
+                    "workspaceId": "@pipeline().parameters.BronzeWorkspaceID"
+                  }
+                }
+              },
+              "type": "DataWarehouseTable",
               "schema": [],
-              "typeProperties": {},
-              "externalReferences": {
-                "connection": "04a76ac6-722a-4f60-813f-08d84e276ff7"
-              }
+              "typeProperties": {}
             }
           },
           "sink": {
@@ -204,21 +211,28 @@
         },
         "typeProperties": {
           "source": {
-            "type": "SqlMISource",
-            "sqlReaderQuery": {
-              "value": "@pipeline().parameters.StatSQL",
-              "type": "Expression"
-            },
+            "type": "DataWarehouseSource",
+            "sqlReaderQuery": "@pipeline().parameters.StatSQL",
+            "queryTimeout": "02:00:00",
             "partitionOption": "None"
           },
           "datasetSettings": {
             "annotations": [],
-            "type": "AzureSqlTable",
+            "linkedService": {
+              "name": "2cd5e48b_d099_404a_96aa_431b87e15164",
+              "properties": {
+                "annotations": [],
+                "type": "DataWarehouse",
+                "typeProperties": {
+                  "endpoint": "@pipeline().parameters.WH_Conrol_Conn_String",
+                  "artifactId": "'replace_source_connection'",
+                  "workspaceId": "@pipeline().parameters.BronzeObjectID"
+                }
+              }
+            },
+            "type": "DataWarehouseTable",
             "schema": [],
-            "typeProperties": {},
-            "externalReferences": {
-              "connection": "04a76ac6-722a-4f60-813f-08d84e276ff7"
-            }
+            "typeProperties": {}
           }
         }
       },
