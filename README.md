@@ -26,11 +26,12 @@ Follow these steps to setup Microsoft Fabric Accelerator:
 4. Open **L1Transform-Generic-Fabric** Notebook and attach it to the bronze Lakehouse that you've just created. Also, take note of the Notebook ID. You will need it later.
 
 5. Open **WH_Control** Warehouse, populate the **WH_Control.ELT.IngestDefinition** and **WH_Control.ELT.L1TransformDefinition** tables with metadata about the source tables that want to ingest into the landing zone. You can use the scripts in **WH_Control_Help** to help you. 
+
 **Atention**: ELT.L1TransformDefinition.ComputeName must be the L1Transform-Generic-Fabric Notebook ID.
 
 6. Create a connection to the source system.
 
-7. Open **Ingest Tables** Pipeline, go to **Copy Source to Lakehouse** Activity, then to **Source** tab and replace the Connection by the connection to the source system that you've just created. Keep the **Query** value (@pipeline().parameters.SourceSQL). Do the same thing with **Ge High Watermark** Activity. Keep the **Query** value (@pipeline().parameters.StatSQL).
+7. Open **Ingest Tables** Pipeline, go to **Copy Source to Lakehouse** Activity, then to **Source** tab and replace the Connection by the connection to the source system that you've just created. Keep the **Query** value (@pipeline().parameters.SourceSQL). Do the same thing with **Get High Watermark** Activity. Keep the **Query** value (@pipeline().parameters.StatSQL).
 
 8. Open **EnvSettings** Notebook and change the folowing variables:
     - **bronzeWorkspaceId:** The Workspace ID.
@@ -42,7 +43,7 @@ Follow these steps to setup Microsoft Fabric Accelerator:
     - **DelayTransformation:** 0
     - **BronzeObjectID:** The landing zone (bronze) Lakehouse ID.
     - **BronzeWorkspaceID:** The Workspace ID.
-    - **WH_Conrol_Name:** The WH_Conrol name (Usually just WH_Conrol).
-    - **WH_Conrol_Conn_String:** The Warehouse connection string.
+    - **WH_Control_Name:** The WH_Control name (Usually just WH_Control).
+    - **WH_Control_Conn_String:** The Warehouse connection string.
 
 10. Execute **Master ELT Orchestration** Pipeline to test it.

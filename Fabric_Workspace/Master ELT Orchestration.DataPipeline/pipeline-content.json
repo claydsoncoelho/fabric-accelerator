@@ -38,8 +38,8 @@
               "properties": {
                 "type": "DataWarehouse",
                 "typeProperties": {
-                  "artifactId": "@pipeline().parameters.WH_Conrol_Name",
-                  "endpoint": "@pipeline().parameters.WH_Conrol_Conn_String",
+                  "artifactId": "@pipeline().parameters.WH_Control_Name",
+                  "endpoint": "@pipeline().parameters.WH_Control_Conn_String",
                   "workspaceId": "@pipeline().parameters.BronzeWorkspaceID"
                 },
                 "annotations": []
@@ -201,12 +201,12 @@
                     "value": "@pipeline().parameters.BronzeWorkspaceID",
                     "type": "Expression"
                   },
-                  "WH_Conrol_Name": {
-                    "value": "@pipeline().parameters.WH_Conrol_Name",
+                  "WH_Control_Name": {
+                    "value": "@pipeline().parameters.WH_Control_Name",
                     "type": "Expression"
                   },
-                  "WH_Conrol_Conn_String": {
-                    "value": "@pipeline().parameters.WH_Conrol_Conn_String",
+                  "WH_Control_Conn_String": {
+                    "value": "@pipeline().parameters.WH_Control_Conn_String",
                     "type": "Expression"
                   }
                 },
@@ -255,12 +255,12 @@
               "value": "@pipeline().parameters.BronzeWorkspaceID",
               "type": "Expression"
             },
-            "WH_Conrol_Name": {
-              "value": "@pipeline().parameters.WH_Conrol_Name",
+            "WH_Control_Name": {
+              "value": "@pipeline().parameters.WH_Control_Name",
               "type": "Expression"
             },
-            "WH_Conrol_Conn_String": {
-              "value": "@pipeline().parameters.WH_Conrol_Conn_String",
+            "WH_Control_Conn_String": {
+              "value": "@pipeline().parameters.WH_Control_Conn_String",
               "type": "Expression"
             }
           },
@@ -300,11 +300,11 @@
         "type": "string",
         "defaultValue": "eae69c09-0dc4-4ec5-8170-2de7483fcb7d"
       },
-      "WH_Conrol_Name": {
+      "WH_Control_Name": {
         "type": "string",
         "defaultValue": "WH_Control"
       },
-      "WH_Conrol_Conn_String": {
+      "WH_Control_Conn_String": {
         "type": "string",
         "defaultValue": "32ebfjmbw6zuhftgkc2b6qekfm-bgoon2webxcu5alqfxtuqp6lpu.datawarehouse.fabric.microsoft.com"
       }
