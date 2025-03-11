@@ -94,10 +94,10 @@ BEGIN
 								WHEN datediff_big(minute,[LastDeltaDate],@localdate) > [MaxIntervalMinutes]
 									THEN 
 										'SELECT * FROM ' + [EntityName] + ' WHERE ' 
-										+ [WatermarkColName] + ' > ' + ''''+CONVERT(VARCHAR(30),[LastDeltaDate],121) +''''+ ' AND ' + [WatermarkColName] + '<=' +  ''''+ CONVERT(VARCHAR(30), DATEADD(minute,[MaxIntervalMinutes],[LastDeltaDate]),121) +''''
+										+ [WatermarkColName] + ' > ' + ''''+CONVERT(VARCHAR(30),[LastDeltaDate],120) +''''+ ' AND ' + [WatermarkColName] + '<=' +  ''''+ CONVERT(VARCHAR(30), DATEADD(minute,[MaxIntervalMinutes],[LastDeltaDate]),120) +''''
 								ELSE 
 									'SELECT * FROM ' + [EntityName] + ' WHERE ' 
-									+ [WatermarkColName] + ' > ' + ''''+ CONVERT(VARCHAR(30),[LastDeltaDate],121) +''''+ ' AND ' + [WatermarkColName] + '<='  + ''''+ CONVERT(VARCHAR(30), @localdate,120) +''''
+									+ [WatermarkColName] + ' > ' + ''''+ CONVERT(VARCHAR(30),[LastDeltaDate],120) +''''+ ' AND ' + [WatermarkColName] + '<='  + ''''+ CONVERT(VARCHAR(30), @localdate,120) +''''
 							END
 					--DEFAULT ANSI SQL for Full Table
 					WHEN [EntityName] IS NOT NULL AND [WatermarkColName] IS NULL
@@ -124,10 +124,10 @@ BEGIN
 									WHEN datediff_big(minute,[LastDeltaDate],@localdate) > [MaxIntervalMinutes] 
 										THEN 
 											'SELECT MIN('+[WatermarkColName]+') AS DataFromTimestamp, MAX('+[WatermarkColName]+') AS DataToTimestamp, count(1) as SourceCount FROM ' + [EntityName] + ' WHERE ' 
-											+ [WatermarkColName] + ' > ' + ''''+CONVERT(varchar(30),LastDeltaDate,121)+''''+ ' AND ' + [WatermarkColName] + ' <= ' + ''''+CONVERT(varchar(30), DATEADD(minute,[MaxIntervalMinutes],[LastDeltaDate]),121)+''''
+											+ [WatermarkColName] + ' > ' + ''''+CONVERT(varchar(30),LastDeltaDate,120)+''''+ ' AND ' + [WatermarkColName] + ' <= ' + ''''+CONVERT(varchar(30), DATEADD(minute,[MaxIntervalMinutes],[LastDeltaDate]),120)+''''
 									ELSE 
 										'SELECT MIN('+[WatermarkColName]+') AS DataFromTimestamp, MAX('+[WatermarkColName]+') AS DataToTimestamp, count(1) as SourceCount FROM ' + [EntityName] + ' WHERE ' 
-										+ [WatermarkColName] + ' > ' + ''''+CONVERT(varchar(30),[LastDeltaDate],121) +''''+ ' AND ' + [WatermarkColName] + ' <= ' + ''''+ CONVERT(varchar(30),(@localdate),120)+''''
+										+ [WatermarkColName] + ' > ' + ''''+CONVERT(varchar(30),[LastDeltaDate],120) +''''+ ' AND ' + [WatermarkColName] + ' <= ' + ''''+ CONVERT(varchar(30),(@localdate),120)+''''
 									END
 					--Common No Delta
 						WHEN [EntityName] IS NOT NULL AND [WatermarkColName] IS NULL
@@ -186,7 +186,7 @@ BEGIN
 					--DEFAULT ANSI SQL for Delta Table
 					WHEN [EntityName] IS NOT NULL AND [WatermarkColName] IS NOT NULL AND [LastDeltaDate] IS NOT NULL 
 						THEN 'SELECT * FROM ' + [EntityName] + ' WHERE ' 
-								+ [WatermarkColName] + ' > ' + ''''+ CONVERT(varchar(30),II.[DataFromTimestamp],121)+''''+ ' AND ' + [WatermarkColName] + ' <= ' + ''''+ CONVERT(varchar(30),II.[DataToTimestamp],121)+''''
+								+ [WatermarkColName] + ' > ' + ''''+ CONVERT(varchar(30),II.[DataFromTimestamp],120)+''''+ ' AND ' + [WatermarkColName] + ' <= ' + ''''+ CONVERT(varchar(30),II.[DataToTimestamp],120)+''''
 					--Common No Delta
 					WHEN [EntityName] IS NOT NULL AND [WatermarkColName] IS NULL
 						THEN 'SELECT * FROM ' + [EntityName]
@@ -206,7 +206,7 @@ BEGIN
 				--DEFAULT ANSI SQL for Delta Table
 					WHEN [EntityName] IS NOT NULL AND [WatermarkColName] IS NOT NULL AND [LastDeltaDate] IS NOT NULL THEN
 								'SELECT MIN('+[WatermarkColName]+') AS DataFromTimestamp, MAX('+[WatermarkColName]+') AS DataToTimestamp, count(1) as SourceCount FROM ' 
-								+ [EntityName] + ' WHERE ' + [WatermarkColName] + '>' + ''''+CONVERT(varchar(30),II.DataFromTimestamp,121)+''''+ ' AND ' + [WatermarkColName] + '<='+ ''''+CONVERT(varchar(30),II.[DataToTimestamp],121)+''''
+								+ [EntityName] + ' WHERE ' + [WatermarkColName] + '>' + ''''+CONVERT(varchar(30),II.DataFromTimestamp,120)+''''+ ' AND ' + [WatermarkColName] + '<='+ ''''+CONVERT(varchar(30),II.[DataToTimestamp],120)+''''
 				--Common No Delta
 					WHEN [EntityName] IS NOT NULL AND [WatermarkColName] IS NULL AND [LastDeltaDate] IS NOT NULL 
 						THEN 'SELECT MIN('+[WatermarkColName]+') AS DataFromTimestamp,' + ' MAX('+[WatermarkColName]+') AS DataToTimestamp,'+ 'COUNT(*) AS SourceCount FROM ' + [EntityName]
