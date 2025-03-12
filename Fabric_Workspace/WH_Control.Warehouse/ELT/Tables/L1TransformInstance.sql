@@ -1,8 +1,8 @@
 CREATE TABLE [ELT].[L1TransformInstance] (
 
-	[L1TransformInstanceID] int NOT NULL, 
+	[L1TransformInstanceID] varchar(255) NOT NULL, 
 	[L1TransformID] int NOT NULL, 
-	[IngestInstanceID] int NULL, 
+	[IngestInstanceID] varchar(255) NULL, 
 	[IngestID] int NOT NULL, 
 	[ComputeName] varchar(100) NULL, 
 	[ComputePath] varchar(200) NULL, 

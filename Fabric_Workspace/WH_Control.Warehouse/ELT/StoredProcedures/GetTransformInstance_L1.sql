@@ -2,7 +2,7 @@ CREATE PROCEDURE [ELT].[GetTransformInstance_L1]
 	@SourceSystemName varchar(20),
 	@StreamName varchar(100) = '%',
 	@MaxTransformInstance int = 10,
-	@L1TransformInstanceId INT = NULL, --To fetch all transform instances set Parameter as NULL otherwise provide a specific instance id
+	@L1TransformInstanceId varchar(255) = NULL, --To fetch all transform instances set Parameter as NULL otherwise provide a specific instance id
 	@DelayL1TransformationFlag INT=NULL --Pass @DelayL1TransformationFlag=0 to fetch all instances that needs to be transformed in the current pipeline (usually the ingestion pipeline). Pass @DelayL1TransformationFlag=1 to fetch all transformations that are scheduled for a later time.
 AS
 begin

@@ -574,21 +574,6 @@
         "sourceLineageTag": "[ELT].[IngestInstance]",
         "columns": [
           {
-            "name": "IngestInstanceID",
-            "dataType": "int64",
-            "sourceColumn": "IngestInstanceID",
-            "formatString": "0",
-            "sourceProviderType": "int",
-            "sourceLineageTag": "IngestInstanceID",
-            "summarizeBy": "sum",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
             "name": "IngestID",
             "dataType": "int64",
             "sourceColumn": "IngestID",
@@ -914,6 +899,20 @@
             "sourceColumn": "ADFIngestPipelineRunID",
             "sourceProviderType": "uniqueidentifier",
             "sourceLineageTag": "ADFIngestPipelineRunID",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "IngestInstanceID",
+            "dataType": "string",
+            "sourceColumn": "IngestInstanceID",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "IngestInstanceID",
             "summarizeBy": "none",
             "annotations": [
               {
@@ -1356,42 +1355,12 @@
         "sourceLineageTag": "[ELT].[L1TransformInstance]",
         "columns": [
           {
-            "name": "L1TransformInstanceID",
-            "dataType": "int64",
-            "sourceColumn": "L1TransformInstanceID",
-            "formatString": "0",
-            "sourceProviderType": "int",
-            "sourceLineageTag": "L1TransformInstanceID",
-            "summarizeBy": "sum",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
             "name": "L1TransformID",
             "dataType": "int64",
             "sourceColumn": "L1TransformID",
             "formatString": "0",
             "sourceProviderType": "int",
             "sourceLineageTag": "L1TransformID",
-            "summarizeBy": "sum",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "IngestInstanceID",
-            "dataType": "int64",
-            "sourceColumn": "IngestInstanceID",
-            "formatString": "0",
-            "sourceProviderType": "int",
-            "sourceLineageTag": "IngestInstanceID",
             "summarizeBy": "sum",
             "annotations": [
               {
@@ -1893,6 +1862,34 @@
             "formatString": "General Date",
             "sourceProviderType": "datetime2",
             "sourceLineageTag": "ModifiedTimestamp",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "IngestInstanceID",
+            "dataType": "string",
+            "sourceColumn": "IngestInstanceID",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "IngestInstanceID",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "L1TransformInstanceID",
+            "dataType": "string",
+            "sourceColumn": "L1TransformInstanceID",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "L1TransformInstanceID",
             "summarizeBy": "none",
             "annotations": [
               {

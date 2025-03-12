@@ -1,6 +1,6 @@
 CREATE TABLE [ELT].[IngestInstance] (
 
-	[IngestInstanceID] int NOT NULL, 
+	[IngestInstanceID] varchar(255) NOT NULL, 
 	[IngestID] int NOT NULL, 
 	[SourceFileDropFileSystem] varchar(50) NULL, 
 	[SourceFileDropFolder] varchar(200) NULL, 

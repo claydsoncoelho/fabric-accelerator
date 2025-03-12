@@ -1,6 +1,3 @@
---DROP PROCEDURE [ELT].[InsertIngestInstance]
---GO
-
 CREATE PROCEDURE [ELT].[InsertIngestInstance]
 	@IngestID INT 
 	,@SourceFileDropFileSystem varchar(50)=null 
@@ -15,17 +12,20 @@ AS
 
 BEGIN
 
-DECLARE 
-	@localdate as datetime	= CONVERT(datetime,CONVERT(datetimeoffset, getdate()) at time zone 'AUS Eastern Standard Time'),
+DECLARE @localdate as datetime = CONVERT(datetime,CONVERT(datetimeoffset, getdate()) at time zone 'AUS Eastern Standard Time');
 
-	--Assign the last identifier value to a variable
-	--If the table doesn't contain any rows, assign zero to the variable
-	@MaxID AS BIGINT
+DECLARE @localdateStr as varchar(255) = CONVERT(VARCHAR(30), GETDATE(), 121);
 
-	IF EXISTS(SELECT * FROM [ELT].[IngestInstance])
-		SET @MaxID = (SELECT MAX([IngestInstanceID]) FROM [ELT].[IngestInstance]);
-	ELSE
-		SET @MaxID = 0;
+DECLARE @seed as varchar(255)  = CAST(@IngestID AS VARCHAR) + @localdateStr;
+	
+DECLARE @primary_key AS varchar(255) = CONVERT(VARCHAR(255), HASHBYTES('SHA2_256', @seed), 2);
+
+DECLARE @MaxID AS BIGINT
+
+--	IF EXISTS(SELECT * FROM [ELT].[IngestInstance])
+--		SET @MaxID = (SELECT MAX([IngestInstanceID]) FROM [ELT].[IngestInstance]);
+--	ELSE
+--		SET @MaxID = 0;
 
 
 	--NOTE:Potential enhancements for lookup.
@@ -43,6 +43,7 @@ DECLARE
 									)
 		)
 	BEGIN
+
 		INSERT INTO [ELT].[IngestInstance]
 				   (IngestInstanceID
 				   ,[IngestID]
@@ -63,7 +64,7 @@ DECLARE
 				   ,[ModifiedTimestamp]
 				   ,ADFIngestPipelineRunID)
 			 VALUES
-				   (@MaxID + 1
+				   (@primary_key
 				   ,@IngestID
 				   ,@SourceFileDropFileSystem
 				   ,@SourceFileDropFolder

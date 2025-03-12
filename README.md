@@ -37,24 +37,8 @@ The information that you will need to populate those tables are:
     - **Backend:** Source system technology (SQL Server for example)
     - General information about the **source tables** to be ingested (Schema, Table Name, Primery Keys, etc...).
 
+7. Create a connection to the source system.
 
-**Atention**: ELT.L1TransformDefinition.ComputeName must be the L1Transform-Generic-Fabric Notebook ID.
+8. Open **Ingest Tables** Pipeline, go to **Copy Source to Lakehouse** Activity, then to **Source** tab and replace the Connection by the connection to the source system that you've just created. Keep the **Query** value (@pipeline().parameters.SourceSQL). Do the same thing with **Get High Watermark** Activity. Keep the **Query** value (@pipeline().parameters.StatSQL).
 
-6. Create a connection to the source system.
-
-7. Open **Ingest Tables** Pipeline, go to **Copy Source to Lakehouse** Activity, then to **Source** tab and replace the Connection by the connection to the source system that you've just created. Keep the **Query** value (@pipeline().parameters.SourceSQL). Do the same thing with **Get High Watermark** Activity. Keep the **Query** value (@pipeline().parameters.StatSQL).
-
-8. Open **EnvSettings** Notebook and change the folowing variables:
-    - **bronzeWorkspaceId:** The Workspace ID.
-    - **bronzeLakehouseName:** The name of the landing zone (bronze) Lakehouse.
-
-9. Open **Master ELT Orchestration** Pipeline, got to Parameters tab, and change the follwoing parameters. Also fix all broken connection to WH_Control, taking care to keep the stored procedures names and parameters.:
-    - **SourceSystemName:** Source system name (The same that you used to populate **WH_Control.ELT.IngestDefinition** on step 4.).
-    - **StreamName:** Leave it blank to process all tables defined in **WH_Control.ELT.IngestDefinition**.
-    - **DelayTransformation:** 0
-    - **BronzeObjectID:** The landing zone (bronze) Lakehouse ID.
-    - **BronzeWorkspaceID:** The Workspace ID.
-    - **WH_Control_Name:** The WH_Control name (Usually just WH_Control).
-    - **WH_Control_Conn_String:** The Warehouse connection string.
-
-10. Execute **Master ELT Orchestration** Pipeline to test it.
+9. Execute **Master ELT Orchestration** Pipeline to test the ingestion process.

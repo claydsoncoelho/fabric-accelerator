@@ -1,5 +1,5 @@
 CREATE PROCEDURE [ELT].[UpdateTransformInstance_L1]
-	@L1TransformInstanceId INT
+	@L1TransformInstanceId VARCHAR(255)
    , @L1TransformStatus VARCHAR(20)
    , @L1TransformADFPipelineRunID UNIQUEIDENTIFIER
    , @IngestCount INT = NULL

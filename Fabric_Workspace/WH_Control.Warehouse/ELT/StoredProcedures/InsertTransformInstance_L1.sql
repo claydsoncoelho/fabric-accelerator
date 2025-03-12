@@ -1,7 +1,7 @@
 CREATE PROCEDURE [ELT].[InsertTransformInstance_L1]
 	--PK/FK
 	@L1TransformID int = null,
-	@IngestInstanceID int=null,
+	@IngestInstanceID varchar(255)=null,
 	@IngestID int,
 
 	--Databricks Notebook
@@ -43,17 +43,13 @@ AS
 BEGIN
 
 
-DECLARE 
-	@localdate as datetime	= CONVERT(datetime,CONVERT(datetimeoffset, getdate()) at time zone 'AUS Eastern Standard Time'),
+DECLARE @localdate as datetime	= CONVERT(datetime,CONVERT(datetimeoffset, getdate()) at time zone 'AUS Eastern Standard Time');
 
-	--Assign the last identifier value to a variable
-	--If the table doesn't contain any rows, assign zero to the variable
-	@MaxID AS BIGINT
+DECLARE @localdateStr as varchar(255) = CONVERT(VARCHAR(30), GETDATE(), 121);
 
-	IF EXISTS(SELECT * FROM [ELT].[IngestInstance])
-		SET @MaxID = (SELECT MAX([IngestInstanceID]) FROM [ELT].[IngestInstance]);
-	ELSE
-		SET @MaxID = 0
+DECLARE @seed as varchar(255)  = CAST(@IngestID AS VARCHAR) + @localdateStr;
+	
+DECLARE @primary_key AS varchar(255) = CONVERT(VARCHAR(255), HASHBYTES('SHA2_256', @seed), 2);
 
 	--Check if Transformation records already exists for the input file for same transformation e.g it's a reload
 		IF NOT EXISTS 
@@ -107,7 +103,7 @@ DECLARE
 			)
 		VALUES
 			(
-				@MaxID + 1
+				@primary_key
 				,@L1TransformID
 				,@IngestInstanceID
 				,@IngestID
