@@ -14,9 +14,13 @@
 # META   }
 # META }
 
+# MARKDOWN ********************
+
+# # <mark>Set the bronze Lakehouse name here:</mark>
+
 # CELL ********************
 
-%run /EnvSettings
+BronzeLakehouseName = "LH_Bronze_Tech_one"
 
 # METADATA ********************
 
@@ -24,6 +28,10 @@
 # META   "language": "python",
 # META   "language_group": "synapse_pyspark"
 # META }
+
+# MARKDOWN ********************
+
+# # <mark>No changes after this point.</mark>
 
 # MARKDOWN ********************
 
@@ -75,21 +83,10 @@ def getAbfsPath(medallionLayer):
     assert medallionLayer in validMedallionLayer, "Invalid medallion layer. Valid values are bronze, silver or gold"
 
     AbfsPath =None
-    workspaceId = None
-    lhName = None
+    workspaceId = notebookutils.runtime.context.get("currentWorkspaceId") # current workspace ID
+    
 
-    match medallionLayer:
-        case "bronze":
-            workspaceId = bronzeWorkspaceId
-            lhName = bronzeLakehouseName
-        case "silver":
-            workspaceId = silverWorkspaceId
-            lhName = silverLakehouseName
-        case "gold":
-            workspaceId = goldWorkspaceId
-            lhName = goldLakehouseName
-
-    lh= notebookutils.lakehouse.getWithProperties(lhName,workspaceId)
+    lh= notebookutils.lakehouse.getWithProperties(BronzeLakehouseName,workspaceId)
     abfsPath = lh.properties["abfsPath"]
 
     return abfsPath

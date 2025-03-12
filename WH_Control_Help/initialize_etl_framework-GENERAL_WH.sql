@@ -3,18 +3,21 @@
 SELECT *
 INTO ELT.Z_Source_Metadata
 FROM (
-    SELECT 'dbo' AS Schema_Name, 'Customers' AS Table_Name, 'CustomerID' as primary_key
-    UNION
-    SELECT 'dbo' AS Schema_Name, 'Orders' AS Table_Name, 'OrderID' as primary_key
-    UNION
-    SELECT 'dbo' AS Schema_Name, 'OrderLines' AS Table_Name, 'OrderLineID' as primary_key
+    SELECT 'dbo' AS Schema_Name, 'F1ASR_ASSET_BOOK' AS Table_Name, 'ASSNBRI|BKNBR|REG_NAME' AS primary_key UNION 
+    SELECT 'dbo' AS Schema_Name, 'F1ASR_ASSET_BOOK_ACCT' AS Table_Name, 'ASSNBRI|BKNBR|REG_NAME|TRANS_LEG_CODE' AS primary_key UNION 
+    SELECT 'dbo' AS Schema_Name, 'F1ASR_REG_ASSET' AS Table_Name, 'ASSNBRI|REG_NAME' AS primary_key
 ) A;
 
 SELECT *
 INTO ELT.Z_Fabric_Metadata
-FROM (SELECT '252a2b74-0b66-4bb9-ba94-9d88bd82d197' as L1NotebookID) B;
-
-
+FROM (SELECT 
+    '1ca0ad73-1aae-45f4-b5ff-d3fb9e718464' as L1NotebookID, 
+    '6c764493-7e36-4433-961e-fe14afd70ea9' as BronzeLakehouseID,
+    '7cvmx6lyyj5edglttzwapovooe-tur52lnkkukerowa7ny6z762zm.datawarehouse.fabric.microsoft.com' AS WH_Control_Conn_String,
+    'Tech_One' as SourceSystemName,
+    'Tech One data comming from finprod database.' as SourceSystemDescription,
+    'SQL Server' AS Backend
+) B;
 
 --------------------------------------- IngestDefinition -------------------------------------------------
 
@@ -53,14 +56,16 @@ INSERT INTO [ELT].[IngestDefinition] (
     [CreatedBy],
     [CreatedTimestamp],
     [ModifiedBy],
-    [ModifiedTimestamp]
+    [ModifiedTimestamp],
+    [BronzeLakehouseID],
+    [WH_Control_Conn_String]
 )
 SELECT
     ROW_NUMBER() OVER (ORDER BY Table_Name) as IngestID,
-    'WWI' AS [SourceSystemName],
+    t.SourceSystemName,
     Table_Name AS [StreamName],
-    'Wide World Importers' AS [SourceSystemDescription],
-    'Azure SQL' AS [Backend],
+    t.SourceSystemDescription,
+    t.Backend,
     NULL AS [DataFormat],  
     (Schema_Name + '.' + Table_Name) as [EntityName],   
     NULL AS [WatermarkColName], 
@@ -78,7 +83,7 @@ SELECT
     NULL AS [SourceFileHeaderFlag], 
     NULL AS [SourceStructure], 
     'Files' AS [DestinationRawFileSystem],
-    'raw_bronze/wwi/'+ Schema_Name +'/'+  Table_Name +'/YYYY-MM' as [DestinationRawFolder], 
+    'raw_bronze/'+t.SourceSystemName+'/'+ Schema_Name +'/'+  Table_Name +'/YYYY-MM' as [DestinationRawFolder], 
     Schema_Name +'_'+ Table_Name + '_'+ 'YYYY-MM-DD_HHMISS.parquet' as [DestinationRawFile], 
     100 AS [RunSequence], 
     3 AS [MaxRetries],
@@ -90,8 +95,11 @@ SELECT
     'initial_load' AS [CreatedBy],
     GETDATE() AS [CreatedTimestamp],
     'initial_load' AS [ModifiedBy], 
-    GETDATE() AS [ModifiedTimestamp] 
-from ELT.Z_Source_Metadata;
+    GETDATE() AS [ModifiedTimestamp],
+    t.BronzeLakehouseID, 
+    t.WH_Control_Conn_String
+from ELT.Z_Source_Metadata
+INNER JOIN ELT.Z_Fabric_Metadata t ON 1=1;
 
 
 --------------------------------------- L1TransformDefinition -------------------------------------------------

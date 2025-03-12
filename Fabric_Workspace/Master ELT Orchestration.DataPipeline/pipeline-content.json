@@ -6,7 +6,7 @@
         "typeProperties": {
           "source": {
             "type": "DataWarehouseSource",
-            "sqlReaderStoredProcedureName": "[ELT].[GetIngestDefinition]",
+            "sqlReaderStoredProcedureName": "[ELT].[GetIngestionDefinition]",
             "storedProcedureParameters": {
               "MaxIngestInstance": {
                 "type": "Int32",
@@ -34,13 +34,13 @@
             "type": "DataWarehouseTable",
             "schema": [],
             "linkedService": {
-              "name": "aa8e4e98_f537_4970_8dbc_89b2f263ceec",
+              "name": "ef04710f_81cd_4203_9cf1_d3e89765a8ad",
               "properties": {
                 "type": "DataWarehouse",
                 "typeProperties": {
-                  "artifactId": "@pipeline().parameters.WH_Conrol_Name",
-                  "endpoint": "@pipeline().parameters.WH_Conrol_Conn_String",
-                  "workspaceId": "@pipeline().parameters.BronzeWorkspaceID"
+                  "artifactId": "''",
+                  "endpoint": "CHANGEME",
+                  "workspaceId": "CHANGEME"
                 },
                 "annotations": []
               }
@@ -194,19 +194,19 @@
                     "type": "Expression"
                   },
                   "BronzeObjectID": {
-                    "value": "@pipeline().parameters.BronzeObjectID",
+                    "value": "@item().BronzeLakehouseID",
                     "type": "Expression"
                   },
                   "BronzeWorkspaceID": {
-                    "value": "@pipeline().parameters.BronzeWorkspaceID",
+                    "value": "@pipeline().DataFactory",
                     "type": "Expression"
                   },
-                  "WH_Conrol_Name": {
-                    "value": "@pipeline().parameters.WH_Conrol_Name",
+                  "WH_Control_Name": {
+                    "value": "@pipeline().parameters.WH_Control_Name",
                     "type": "Expression"
                   },
-                  "WH_Conrol_Conn_String": {
-                    "value": "@pipeline().parameters.WH_Conrol_Conn_String",
+                  "WH_Control_Conn_String": {
+                    "value": "@item().WH_Control_Conn_String",
                     "type": "Expression"
                   }
                 },
@@ -252,15 +252,15 @@
               "type": "Expression"
             },
             "BronzeWorkspaceID": {
-              "value": "@pipeline().parameters.BronzeWorkspaceID",
+              "value": "@pipeline().DataFactory",
               "type": "Expression"
             },
-            "WH_Conrol_Name": {
-              "value": "@pipeline().parameters.WH_Conrol_Name",
+            "WH_Control_Name": {
+              "value": "@pipeline().parameters.WH_Control_Name",
               "type": "Expression"
             },
-            "WH_Conrol_Conn_String": {
-              "value": "@pipeline().parameters.WH_Conrol_Conn_String",
+            "WH_Control_Conn_String": {
+              "value": "@activity('Get SQL Tables to Ingest').output.value[0].WH_Control_Conn_String",
               "type": "Expression"
             }
           },
@@ -283,7 +283,7 @@
     "parameters": {
       "SourceSystemName": {
         "type": "string",
-        "defaultValue": "WWI"
+        "defaultValue": "Tech_One"
       },
       "StreamName": {
         "type": "string"
@@ -292,21 +292,9 @@
         "type": "int",
         "defaultValue": 0
       },
-      "BronzeObjectID": {
-        "type": "string",
-        "defaultValue": "b0153702-14e7-4a98-be5b-fd623929a5a4"
-      },
-      "BronzeWorkspaceID": {
-        "type": "string",
-        "defaultValue": "eae69c09-0dc4-4ec5-8170-2de7483fcb7d"
-      },
-      "WH_Conrol_Name": {
+      "WH_Control_Name": {
         "type": "string",
         "defaultValue": "WH_Control"
-      },
-      "WH_Conrol_Conn_String": {
-        "type": "string",
-        "defaultValue": "32ebfjmbw6zuhftgkc2b6qekfm-bgoon2webxcu5alqfxtuqp6lpu.datawarehouse.fabric.microsoft.com"
       }
     },
     "variables": {

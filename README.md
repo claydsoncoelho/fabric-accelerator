@@ -23,13 +23,26 @@ Follow these steps to setup Microsoft Fabric Accelerator:
 
 3. Create a Fabric **Lakehouse** to be be the landing zone (bronze layer) of the Data Platform. Take note of the Connetion ID. You will need it later.
 
-4. Open **L1Transform-Generic-Fabric** Notebook and attach it to the bronze Lakehouse that you've just created. Also, take note of the Notebook ID. You will need it later.
+4. Open **L1Transform-Generic-Fabric** Notebook and adjust the **defaultLakehouse** parameter with the name of the bronze Lakehouse that you've just created. Also, take note of the this Notebook ID. You will need it later.
 
-5. Open **WH_Control** Warehouse, populate the **WH_Control.ELT.IngestDefinition** and **WH_Control.ELT.L1TransformDefinition** tables with metadata about the source tables that want to ingest into the landing zone. You can use the scripts in **WH_Control_Help** to help you. **Atention**: ELT.L1TransformDefinition.ComputeName must be the L1Transform-Generic-Fabric Notebook ID.
+5. Open **Utils_DeltaLakeFunctions** Notebook and adjust the **BronzeLakehouseName** parameter with the name of the bronze Lakehouse that you've just created.
+
+6. Open **WH_Control** Warehouse, populate the **WH_Control.ELT.IngestDefinition** and **WH_Control.ELT.L1TransformDefinition** tables with metadata about the source system tables and Workspace objects. You can use the scripts in **WH_Control_Help** to help you. These tables will have the same structure in all Workspaces (Dev, Test, Prod), but with different content, related to each environmen. 
+The information that you will need to populate those tables are:
+    - **L1NotebookID:** L1Transform-Generic-Fabric Notebook ID.
+    - **BronzeLakehouseID:** Lakehouse ID of the bronze Lakehouse that you create.
+    - **WH_Control_Conn_String:** Connection string of your Lakehouse. 
+    - **SourceSystemName:** Source system name
+    - **SourceSystemDescription:** Source system name
+    - **Backend:** Source system technology (SQL Server for example)
+    - General information about the **source tables** to be ingested (Schema, Table Name, Primery Keys, etc...).
+
+
+**Atention**: ELT.L1TransformDefinition.ComputeName must be the L1Transform-Generic-Fabric Notebook ID.
 
 6. Create a connection to the source system.
 
-7. Open **Ingest Tables** Pipeline, go to **Copy Source to Lakehouse** Activity, then to **Source** tab and replace the Connection by the connection to the source system that you've just created. Also fix all broken connection to WH_Control, taking care to keep the stored procedures names and parameters.
+7. Open **Ingest Tables** Pipeline, go to **Copy Source to Lakehouse** Activity, then to **Source** tab and replace the Connection by the connection to the source system that you've just created. Keep the **Query** value (@pipeline().parameters.SourceSQL). Do the same thing with **Get High Watermark** Activity. Keep the **Query** value (@pipeline().parameters.StatSQL).
 
 8. Open **EnvSettings** Notebook and change the folowing variables:
     - **bronzeWorkspaceId:** The Workspace ID.
@@ -41,7 +54,7 @@ Follow these steps to setup Microsoft Fabric Accelerator:
     - **DelayTransformation:** 0
     - **BronzeObjectID:** The landing zone (bronze) Lakehouse ID.
     - **BronzeWorkspaceID:** The Workspace ID.
-    - **WH_Conrol_Name:** The WH_Conrol name (Usually just WH_Conrol).
-    - **WH_Conrol_Conn_String:** The Warehouse connection string.
+    - **WH_Control_Name:** The WH_Control name (Usually just WH_Control).
+    - **WH_Control_Conn_String:** The Warehouse connection string.
 
 10. Execute **Master ELT Orchestration** Pipeline to test it.

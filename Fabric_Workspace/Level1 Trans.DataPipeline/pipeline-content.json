@@ -72,8 +72,8 @@
             "annotations": [],
             "type": "DataWarehouse",
             "typeProperties": {
-              "endpoint": "@pipeline().parameters.WH_Conrol_Conn_String",
-              "artifactId": "@pipeline().parameters.WH_Conrol_Name",
+              "endpoint": "@pipeline().parameters.WH_Control_Conn_String",
+              "artifactId": "@pipeline().parameters.WH_Control_Name",
               "workspaceId": "@pipeline().parameters.BronzeWorkspaceID"
             }
           }
@@ -269,25 +269,36 @@
           {
             "activity": "Set numTargetRowsInserted",
             "dependencyConditions": [
-              "Completed"
+              "Completed",
+              "Skipped"
             ]
           },
           {
             "activity": "Set numSourceRows",
             "dependencyConditions": [
-              "Completed"
+              "Completed",
+              "Skipped"
             ]
           },
           {
             "activity": "Set numTargetRowsUpdated",
             "dependencyConditions": [
-              "Completed"
+              "Completed",
+              "Skipped"
             ]
           },
           {
             "activity": "Level 1 Transform FAILURE",
             "dependencyConditions": [
-              "Completed"
+              "Completed",
+              "Skipped"
+            ]
+          },
+          {
+            "activity": "Set numTargetRowsDeleted",
+            "dependencyConditions": [
+              "Completed",
+              "Skipped"
             ]
           }
         ],
@@ -363,8 +374,8 @@
             "annotations": [],
             "type": "DataWarehouse",
             "typeProperties": {
-              "endpoint": "@pipeline().parameters.WH_Conrol_Conn_String",
-              "artifactId": "@pipeline().parameters.WH_Conrol_Name",
+              "endpoint": "@pipeline().parameters.WH_Control_Conn_String",
+              "artifactId": "@pipeline().parameters.WH_Control_Name",
               "workspaceId": "@pipeline().parameters.BronzeWorkspaceID"
             }
           }
@@ -494,8 +505,8 @@
             "annotations": [],
             "type": "DataWarehouse",
             "typeProperties": {
-              "endpoint": "@pipeline().parameters.WH_Conrol_Conn_String",
-              "artifactId": "@pipeline().parameters.WH_Conrol_Name",
+              "endpoint": "@pipeline().parameters.WH_Control_Conn_String",
+              "artifactId": "@pipeline().parameters.WH_Control_Name",
               "workspaceId": "@pipeline().parameters.BronzeWorkspaceID"
             }
           }
@@ -614,10 +625,10 @@
       "BronzeWorkspaceID": {
         "type": "string"
       },
-      "WH_Conrol_Name": {
+      "WH_Control_Name": {
         "type": "string"
       },
-      "WH_Conrol_Conn_String": {
+      "WH_Control_Conn_String": {
         "type": "string"
       }
     },

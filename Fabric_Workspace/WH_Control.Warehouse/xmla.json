@@ -520,6 +520,34 @@
                 "value": "Automatic"
               }
             ]
+          },
+          {
+            "name": "BronzeLakehouseID",
+            "dataType": "string",
+            "sourceColumn": "BronzeLakehouseID",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "BronzeLakehouseID",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "WH_Control_Conn_String",
+            "dataType": "string",
+            "sourceColumn": "WH_Control_Conn_String",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "WH_Control_Conn_String",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
           }
         ],
         "partitions": [

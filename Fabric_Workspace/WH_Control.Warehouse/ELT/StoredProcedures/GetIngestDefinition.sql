@@ -60,23 +60,27 @@ as
 				,[DestinationRawFileSystem]
 		
 			--Derived Fields
-				,[DestinationRawFolder] = 
-					REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE([DestinationRawFolder] COLLATE SQL_Latin1_General_CP1_CS_AS
+				, [DestinationRawFolder] = 
+					REPLACE(REPLACE(REPLACE(REPLACE([DestinationRawFolder] COLLATE SQL_Latin1_General_CP1_CS_AS
 					,'YYYY',CAST(Year(COALESCE([LastDeltaDate],@localdate)) as varchar(4)))
 					,'MM',Right('0'+ CAST(Month(COALESCE([LastDeltaDate],@localdate)) AS varchar(2)),2))
 					,'DD',Right('0'+Cast(Day(COALESCE([LastDeltaDate],@localdate)) as varchar(2)),2))
-					,'HH',Right('0'+ CAST(DatePart(hh,COALESCE([LastDeltaDate],@localdate)) as varchar(2)),2))
-					,'MI',Right('0'+ CAST(DatePart(mi,COALESCE([LastDeltaDate],@localdate)) as varchar(2)),2))
-					,'SS',Right('0'+ CAST(DatePart(ss,COALESCE([LastDeltaDate],@localdate)) as varchar(2)),2))
-			
-				,[DestinationRawFile] = 
-					REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE([DestinationRawFile] COLLATE SQL_Latin1_General_CP1_CS_AS
-					,'YYYY',CAST(Year(COALESCE([LastDeltaDate],@localdate)) AS varchar(4)))
-					,'MM',Right('0'+ CAST(Month(COALESCE([LastDeltaDate],@localdate)) AS varchar(2)),2))
-					,'DD',Right('0'+Cast(Day(COALESCE([LastDeltaDate],@localdate)) as varchar(2)),2))
-					,'HH',Right('0'+ CAST(DatePart(hh,COALESCE([LastDeltaDate],@localdate)) AS varchar(2)),2))
-					,'MI',Right('0'+ CAST(DatePart(mi,COALESCE([LastDeltaDate],@localdate)) AS varchar(2)),2))
-					,'SS',Right('0'+ CAST(DatePart(ss,COALESCE([LastDeltaDate],@localdate)) AS varchar(2)),2))			
+					,'HHMISS',
+						RIGHT('0' + CAST(DatePart(hh, COALESCE([LastDeltaDate], @localdate)) AS varchar(2)), 2) +
+						RIGHT('0' + CAST(DatePart(mi, COALESCE([LastDeltaDate], @localdate)) AS varchar(2)), 2) +
+						RIGHT('0' + CAST(DatePart(ss, COALESCE([LastDeltaDate], @localdate)) AS varchar(2)), 2)
+					)
+		
+				, [DestinationRawFile] = 
+					REPLACE(REPLACE(REPLACE(REPLACE([DestinationRawFile] COLLATE SQL_Latin1_General_CP1_CS_AS,
+					'YYYY', CAST(Year(COALESCE([LastDeltaDate], @localdate)) AS varchar(4))),
+					'MM', RIGHT('0' + CAST(Month(COALESCE([LastDeltaDate], @localdate)) AS varchar(2)), 2)),
+					'DD', RIGHT('0' + CAST(Day(COALESCE([LastDeltaDate], @localdate)) AS varchar(2)), 2)),
+					'HHMISS',
+						RIGHT('0' + CAST(DatePart(hh, COALESCE([LastDeltaDate], @localdate)) AS varchar(2)), 2) +
+						RIGHT('0' + CAST(DatePart(mi, COALESCE([LastDeltaDate], @localdate)) AS varchar(2)), 2) +
+						RIGHT('0' + CAST(DatePart(ss, COALESCE([LastDeltaDate], @localdate)) AS varchar(2)), 2)
+					)		
 
 
 			--Query
@@ -139,6 +143,8 @@ as
 
 				, CAST(0 AS BIT) AS [ReloadFlag]
 				, NULL AS [ADFPipelineRunID]
+				, [BronzeLakehouseID]
+				, [WH_Control_Conn_String]
 			FROM 
 				[ELT].[IngestDefinition]
 			WHERE 
@@ -218,8 +224,10 @@ UNION
 						ELSE NULL 	
 					END
 
-				,II.[ReloadFlag]
+				, II.[ReloadFlag]
 				, II.[ADFIngestPipelineRunID]
+				, ID.[BronzeLakehouseID]
+				, ID.[WH_Control_Conn_String]
 			FROM 
 				[ELT].[IngestDefinition] ID
 					INNER JOIN [ELT].[IngestInstance] AS II

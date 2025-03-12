@@ -14,6 +14,30 @@
 # META   }
 # META }
 
+# MARKDOWN ********************
+
+# # <mark>Set the bronze Lakehouse name here:</mark>
+
+# CELL ********************
+
+# MAGIC %%configure
+# MAGIC {
+# MAGIC     "defaultLakehouse": {
+# MAGIC         "name": "LH_Bronze_Tech_one"
+# MAGIC     }
+# MAGIC }
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# MARKDOWN ********************
+
+# # <mark>No changes after this point.</mark>
+
 # CELL ********************
 
 %run /Utils_CommonTransforms
