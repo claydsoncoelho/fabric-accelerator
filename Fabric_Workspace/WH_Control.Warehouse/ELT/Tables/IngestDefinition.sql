@@ -34,6 +34,8 @@ CREATE TABLE [ELT].[IngestDefinition] (
 	[CreatedBy] varchar(128) NOT NULL, 
 	[CreatedTimestamp] datetime2(6) NOT NULL, 
 	[ModifiedBy] varchar(128) NULL, 
-	[ModifiedTimestamp] datetime2(6) NULL
+	[ModifiedTimestamp] datetime2(6) NULL, 
+	[BronzeLakehouseID] varchar(128) NULL, 
+	[WH_Control_Conn_String] varchar(255) NULL
 );
 

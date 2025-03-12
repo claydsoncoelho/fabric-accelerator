@@ -16,11 +16,6 @@
 
 # MARKDOWN ********************
 
-# # What is CommonTransforms and how to use them in your notebooks ?  
-# CommonTransforms is a Python class that uses PySpark libraries to apply common transformations to a Spark dataframe. https://github.com/bennyaustin/pyspark-utils/blob/main/CommonTransforms/README.md
-
-# MARKDOWN ********************
-
 # # CommonTransforms Class
 
 # CELL ********************

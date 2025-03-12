@@ -123,14 +123,14 @@
             "datasetSettings": {
               "annotations": [],
               "linkedService": {
-                "name": "4ba18714_66f6_4eb5_a513_bfee00282dac",
+                "name": "e7a58320_d8b6_4ae6_8e20_35e495b9a003",
                 "properties": {
                   "annotations": [],
                   "type": "DataWarehouse",
                   "typeProperties": {
-                    "endpoint": "@pipeline().parameters.WH_Control_Conn_String",
-                    "artifactId": "'replace_source_connection'",
-                    "workspaceId": "@pipeline().parameters.BronzeWorkspaceID"
+                    "endpoint": "CHANGEME",
+                    "artifactId": "CHANGEME",
+                    "workspaceId": "2ddd239d-55aa-4814-bac0-fb71ecffdacb"
                   }
                 }
               },
@@ -219,14 +219,14 @@
           "datasetSettings": {
             "annotations": [],
             "linkedService": {
-              "name": "2cd5e48b_d099_404a_96aa_431b87e15164",
+              "name": "bb5c7cc9_4fb2_49bf_93af_592f03b8517a",
               "properties": {
                 "annotations": [],
                 "type": "DataWarehouse",
                 "typeProperties": {
-                  "endpoint": "@pipeline().parameters.WH_Control_Conn_String",
-                  "artifactId": "'replace_source_connection'",
-                  "workspaceId": "@pipeline().parameters.BronzeObjectID"
+                  "endpoint": "CHANGEME",
+                  "artifactId": "CHANGEME",
+                  "workspaceId": "CHANGEME"
                 }
               }
             },
@@ -459,7 +459,7 @@
               "dependsOn": [],
               "policy": {
                 "timeout": "0.12:00:00",
-                "retry": 0,
+                "retry": 4,
                 "retryIntervalInSeconds": 30,
                 "secureOutput": false,
                 "secureInput": false

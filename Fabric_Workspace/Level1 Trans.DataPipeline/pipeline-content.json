@@ -72,8 +72,8 @@
             "annotations": [],
             "type": "DataWarehouse",
             "typeProperties": {
-              "endpoint": "@pipeline().parameters.WH_Conrol_Conn_String",
-              "artifactId": "@pipeline().parameters.WH_Conrol_Name",
+              "endpoint": "@pipeline().parameters.WH_Control_Conn_String",
+              "artifactId": "@pipeline().parameters.WH_Control_Name",
               "workspaceId": "@pipeline().parameters.BronzeWorkspaceID"
             }
           }
@@ -267,13 +267,6 @@
         "type": "SqlServerStoredProcedure",
         "dependsOn": [
           {
-            "activity": "Level 1 Transform FAILURE",
-            "dependencyConditions": [
-              "Skipped",
-              "Completed"
-            ]
-          },
-          {
             "activity": "Set numTargetRowsInserted",
             "dependencyConditions": [
               "Completed",
@@ -281,7 +274,7 @@
             ]
           },
           {
-            "activity": "Set numTargetRowsDeleted",
+            "activity": "Set numSourceRows",
             "dependencyConditions": [
               "Completed",
               "Skipped"
@@ -295,7 +288,14 @@
             ]
           },
           {
-            "activity": "Set numSourceRows",
+            "activity": "Level 1 Transform FAILURE",
+            "dependencyConditions": [
+              "Completed",
+              "Skipped"
+            ]
+          },
+          {
+            "activity": "Set numTargetRowsDeleted",
             "dependencyConditions": [
               "Completed",
               "Skipped"
@@ -374,8 +374,8 @@
             "annotations": [],
             "type": "DataWarehouse",
             "typeProperties": {
-              "endpoint": "@pipeline().parameters.WH_Conrol_Conn_String",
-              "artifactId": "@pipeline().parameters.WH_Conrol_Name",
+              "endpoint": "@pipeline().parameters.WH_Control_Conn_String",
+              "artifactId": "@pipeline().parameters.WH_Control_Name",
               "workspaceId": "@pipeline().parameters.BronzeWorkspaceID"
             }
           }
@@ -505,8 +505,8 @@
             "annotations": [],
             "type": "DataWarehouse",
             "typeProperties": {
-              "endpoint": "@pipeline().parameters.WH_Conrol_Conn_String",
-              "artifactId": "@pipeline().parameters.WH_Conrol_Name",
+              "endpoint": "@pipeline().parameters.WH_Control_Conn_String",
+              "artifactId": "@pipeline().parameters.WH_Control_Name",
               "workspaceId": "@pipeline().parameters.BronzeWorkspaceID"
             }
           }
@@ -539,19 +539,19 @@
     "parameters": {
       "L1TransformInstanceID": {
         "type": "int",
-        "defaultValue": 3
+        "defaultValue": 5
       },
       "L1TransformID": {
         "type": "int",
-        "defaultValue": 1
+        "defaultValue": 2
       },
       "IngestID": {
         "type": "int",
-        "defaultValue": 1
+        "defaultValue": 2
       },
       "ComputeName": {
         "type": "string",
-        "defaultValue": "15e4bf1e-4206-4759-9fca-64177a514b4d"
+        "defaultValue": "252a2b74-0b66-4bb9-ba94-9d88bd82d197"
       },
       "ComputePath": {
         "type": "string"
@@ -565,11 +565,11 @@
       },
       "InputRawFileFolder": {
         "type": "string",
-        "defaultValue": "raw_bronze/wwi/dbo/Customers/2025-03"
+        "defaultValue": "raw-bronze/wwi/Customers/1900-01"
       },
       "InputRawFile": {
         "type": "string",
-        "defaultValue": "dbo_Customers_2025-03-06_175033.parquet"
+        "defaultValue": "Customers_1900-01-01_000000.parquet"
       },
       "InputRawFileDelimiter": {
         "type": "string"
@@ -605,7 +605,7 @@
       },
       "OutputDWTable": {
         "type": "string",
-        "defaultValue": "Customers"
+        "defaultValue": "silver.Customers"
       },
       "OutputDWTableWriteMode": {
         "type": "string",
@@ -623,16 +623,13 @@
         "type": "string"
       },
       "BronzeWorkspaceID": {
-        "type": "string",
-        "defaultValue": "70b290e3-7bb3-4c05-8fb7-ea00e7608f25"
+        "type": "string"
       },
-      "WH_Conrol_Name": {
-        "type": "string",
-        "defaultValue": "WH_Control"
+      "WH_Control_Name": {
+        "type": "string"
       },
-      "WH_Conrol_Conn_String": {
-        "type": "string",
-        "defaultValue": "32ebfjmbw6zuhftgkc2b6qekfm-4oile4ftpmcuzd5x5iaooyepeu.datawarehouse.fabric.microsoft.com"
+      "WH_Control_Conn_String": {
+        "type": "string"
       }
     },
     "variables": {
