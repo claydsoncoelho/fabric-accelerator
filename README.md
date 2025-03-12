@@ -30,11 +30,11 @@ Follow these steps to setup Microsoft Fabric Accelerator:
 6. Open **WH_Control** Warehouse, populate the **WH_Control.ELT.IngestDefinition** and **WH_Control.ELT.L1TransformDefinition** tables with metadata about the source system tables and Workspace objects. You can use the scripts in **WH_Control_Help** to help you. These tables will have the same structure in all Workspaces (Dev, Test, Prod), but with different content, related to each environmen. 
 The information that you will need to populate those tables are:
     - **L1NotebookID:** L1Transform-Generic-Fabric Notebook ID.
-    - **BronzeLakehouseID:** Lakehouse ID of the bronze Lakehouse that you create.
-    - **WH_Control_Conn_String:** Connection string of your Lakehouse. 
-    - **SourceSystemName:** Source system name
-    - **SourceSystemDescription:** Source system name
-    - **Backend:** Source system technology (SQL Server for example)
+    - **BronzeLakehouseID:** Lakehouse ID of the bronze Lakehouse that you created.
+    - **WH_Control_Conn_String:** Connection string of your WH_Control Lakehouse. 
+    - **SourceSystemName:** Source system name.
+    - **SourceSystemDescription:** Source system description.
+    - **Backend:** Source system technology (SQL Server, for example).
     - General information about the **source tables** to be ingested (Schema, Table Name, Primery Keys, etc...).
 
 7. Create a connection to the source system.
