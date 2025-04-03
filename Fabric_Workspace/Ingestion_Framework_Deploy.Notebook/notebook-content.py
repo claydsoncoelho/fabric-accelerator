@@ -1075,16 +1075,9 @@
 # MAGIC SELECT *
 # MAGIC INTO ELT.Z_Source_Metadata
 # MAGIC FROM (
-# MAGIC     SELECT 'dbo' AS Schema_Name, 'Customers'	AS Table_Name, 'CustomerID'		AS primary_key, NULL	AS WatermarkColName UNION
-# MAGIC 	SELECT 'dbo' AS Schema_Name, 'Orders'		AS Table_Name, 'OrderID'		AS primary_key, NULL	AS WatermarkColName UNION
-# MAGIC 	SELECT 'dbo' AS Schema_Name, 'Products'		AS Table_Name, 'ProductID'		AS primary_key, NULL	AS WatermarkColName UNION
-# MAGIC 	SELECT 'dbo' AS Schema_Name, 'OrderDetails'	AS Table_Name, 'OrderDetailID'	AS primary_key, NULL	AS WatermarkColName UNION
-# MAGIC 	SELECT 'dbo' AS Schema_Name, 'Categories'	AS Table_Name, 'CategoryID'		AS primary_key, NULL	AS WatermarkColName UNION
-# MAGIC 	SELECT 'dbo' AS Schema_Name, 'Suppliers'	AS Table_Name, 'SupplierID'		AS primary_key, NULL	AS WatermarkColName UNION
-# MAGIC 	SELECT 'dbo' AS Schema_Name, 'Employees'	AS Table_Name, 'EmployeeID'		AS primary_key, NULL	AS WatermarkColName UNION
-# MAGIC 	SELECT 'dbo' AS Schema_Name, 'Payments'		AS Table_Name, 'PaymentID'		AS primary_key, NULL	AS WatermarkColName UNION
-# MAGIC 	SELECT 'dbo' AS Schema_Name, 'Shippers'		AS Table_Name, 'ShipperID'		AS primary_key, NULL	AS WatermarkColName UNION
-# MAGIC 	SELECT 'dbo' AS Schema_Name, 'Inventory'	AS Table_Name, 'ProductID'		AS primary_key, NULL	AS WatermarkColName 
+# MAGIC     SELECT 'dbo' AS Schema_Name, 'Customers'	AS Table_Name, 'CustomerID'		                    AS primary_key, NULL	AS WatermarkColName UNION
+# MAGIC 	SELECT 'dbo' AS Schema_Name, 'Orders'		AS Table_Name, 'CustomerID|OrderDate|TotalAmount'	AS primary_key, NULL	AS WatermarkColName UNION
+# MAGIC 	SELECT 'dbo' AS Schema_Name, 'Inventory'	AS Table_Name, 'ProductID'		                    AS primary_key, NULL	AS WatermarkColName 
 # MAGIC ) A;
 # MAGIC 
 # MAGIC SELECT *
