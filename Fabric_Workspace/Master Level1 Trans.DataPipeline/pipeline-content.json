@@ -72,7 +72,8 @@
       {
         "type": "ForEach",
         "typeProperties": {
-          "isSequential": true,
+          "isSequential": false,
+          "batchCount": 4,
           "items": {
             "value": "@activity('Get Level1 Transform Instances').output.value",
             "type": "Expression"
@@ -219,7 +220,7 @@
     "parameters": {
       "SourceSystemName": {
         "type": "string",
-        "defaultValue": "WWI"
+        "defaultValue": "Tech_One"
       },
       "StreamName": {
         "type": "string"
@@ -233,13 +234,16 @@
         "defaultValue": 0
       },
       "BronzeWorkspaceID": {
-        "type": "string"
+        "type": "string",
+        "defaultValue": "2ddd239d-CHANGE-ME-bac0-fb71ecffdacb"
       },
       "WH_Control_Name": {
-        "type": "string"
+        "type": "string",
+        "defaultValue": "WH_Control"
       },
       "WH_Control_Conn_String": {
-        "type": "string"
+        "type": "string",
+        "defaultValue": "7cvCHANGE_MEovooe-tuCHANGE_ME7ny6z762zm.datawarehouse.fabric.microsoft.com"
       }
     }
   }

@@ -83,7 +83,14 @@
       {
         "name": "Set RunID",
         "type": "SetVariable",
-        "dependsOn": [],
+        "dependsOn": [
+          {
+            "activity": "Wait1",
+            "dependencyConditions": [
+              "Completed"
+            ]
+          }
+        ],
         "policy": {
           "secureOutput": false,
           "secureInput": false
@@ -116,27 +123,26 @@
         },
         "typeProperties": {
           "source": {
-            "type": "DataWarehouseSource",
-            "sqlReaderQuery": "@pipeline().parameters.SourceSQL",
+            "type": "SqlServerSource",
+            "sqlReaderQuery": {
+              "value": "@pipeline().parameters.SourceSQL",
+              "type": "Expression"
+            },
             "queryTimeout": "02:00:00",
             "partitionOption": "None",
             "datasetSettings": {
               "annotations": [],
-              "linkedService": {
-                "name": "e7a58320_d8b6_4ae6_8e20_35e495b9a003",
-                "properties": {
-                  "annotations": [],
-                  "type": "DataWarehouse",
-                  "typeProperties": {
-                    "endpoint": "CHANGEME",
-                    "artifactId": "CHANGEME",
-                    "workspaceId": "2ddd239d-55aa-4814-bac0-fb71ecffdacb"
-                  }
+              "type": "SqlServerTable",
+              "schema": [],
+              "typeProperties": {
+                "database": {
+                  "value": "@pipeline().parameters.Source_Database_Name",
+                  "type": "Expression"
                 }
               },
-              "type": "DataWarehouseTable",
-              "schema": [],
-              "typeProperties": {}
+              "externalReferences": {
+                "connection": "@pipeline().parameters.Source_Connection_ID"
+              }
             }
           },
           "sink": {
@@ -211,28 +217,27 @@
         },
         "typeProperties": {
           "source": {
-            "type": "DataWarehouseSource",
-            "sqlReaderQuery": "@pipeline().parameters.StatSQL",
+            "type": "SqlServerSource",
+            "sqlReaderQuery": {
+              "value": "@pipeline().parameters.StatSQL",
+              "type": "Expression"
+            },
             "queryTimeout": "02:00:00",
             "partitionOption": "None"
           },
           "datasetSettings": {
             "annotations": [],
-            "linkedService": {
-              "name": "bb5c7cc9_4fb2_49bf_93af_592f03b8517a",
-              "properties": {
-                "annotations": [],
-                "type": "DataWarehouse",
-                "typeProperties": {
-                  "endpoint": "CHANGEME",
-                  "artifactId": "CHANGEME",
-                  "workspaceId": "CHANGEME"
-                }
+            "type": "SqlServerTable",
+            "schema": [],
+            "typeProperties": {
+              "database": {
+                "value": "@pipeline().parameters.Source_Database_Name",
+                "type": "Expression"
               }
             },
-            "type": "DataWarehouseTable",
-            "schema": [],
-            "typeProperties": {}
+            "externalReferences": {
+              "connection": "@pipeline().parameters.Source_Connection_ID"
+            }
           }
         }
       },
@@ -701,6 +706,17 @@
             }
           }
         }
+      },
+      {
+        "name": "Wait1",
+        "type": "Wait",
+        "dependsOn": [],
+        "typeProperties": {
+          "waitTimeInSeconds": {
+            "value": "@rand(0,8)",
+            "type": "Expression"
+          }
+        }
       }
     ],
     "parameters": {
@@ -710,30 +726,30 @@
       },
       "SourceSystemName": {
         "type": "string",
-        "defaultValue": "WWI"
+        "defaultValue": "Tech_One"
       },
       "StreamName": {
         "type": "string",
-        "defaultValue": "Customers"
+        "defaultValue": "TABLE_NAME"
       },
       "EntityName": {
         "type": "string",
-        "defaultValue": "dbo.Customers"
+        "defaultValue": "dbo.TABLE_NAME"
       },
       "WatermarkColName": {
         "type": "string"
       },
       "LastDeltaDate": {
         "type": "string",
-        "defaultValue": "1900-01-01 00:00:00.0000000"
+        "defaultValue": "2025-03-12T15:04:11Z"
       },
       "DataFromTimestamp": {
         "type": "string",
-        "defaultValue": "1900-01-01 00:00:00.0000000"
+        "defaultValue": "2025-03-12T15:04:11Z"
       },
       "DataToTimestamp": {
         "type": "string",
-        "defaultValue": "2024-10-03 18:57:36.0000000"
+        "defaultValue": "2025-03-12T16:51:56Z"
       },
       "LastDeltaNumber": {
         "type": "int",
@@ -794,19 +810,19 @@
       },
       "DestinationRawFolder": {
         "type": "string",
-        "defaultValue": "raw-bronze/wwi/Customers/1900-01"
+        "defaultValue": "raw_bronze/SOURCE_SYSTEM/dbo/TABLE_NAME/2025-03"
       },
       "DestinationRawFile": {
         "type": "string",
-        "defaultValue": "Customers_1900-01-01_000000.parquet"
+        "defaultValue": "dbo_TABLE_NAME_2025-03-12_150411.parquet"
       },
       "SourceSQL": {
         "type": "string",
-        "defaultValue": "SELECT * FROM Customers"
+        "defaultValue": "SELECT * FROM dbo.TABLE_NAME"
       },
       "StatSQL": {
         "type": "string",
-        "defaultValue": "SELECT '1900-01-01 00:00:00' AS DataFromTimestamp, '2024-10-03 18:57:36' AS DataToTimestamp,  COUNT(*) AS SourceCount FROM Customers"
+        "defaultValue": "SELECT '1900-01-01 00:00:00' AS DataFromTimestamp, '2025-03-12 16:52:00' AS DataToTimestamp,  COUNT(*) AS SourceCount FROM dbo.TABLE_NAME"
       },
       "ReloadFlag": {
         "type": "bool",
@@ -818,17 +834,26 @@
       },
       "BronzeObjectID": {
         "type": "string",
-        "defaultValue": "c5989c50-bf8f-4cce-8f43-84174316cdcf"
+        "defaultValue": "6c764493-CHANGE-ME-961e-fe14afd70ea9"
       },
       "BronzeWorkspaceID": {
         "type": "string",
-        "defaultValue": "c5a446d5-a746-47ea-94a1-d74b3faa71b0"
+        "defaultValue": "2ddd239d-CHANGE-ME-bac0-fb71ecffdacb"
       },
       "WH_Control_Name": {
-        "type": "string"
+        "type": "string",
+        "defaultValue": "WH_Control"
       },
       "WH_Control_Conn_String": {
+        "type": "string",
+        "defaultValue": "7cvmxCHANGE_MElttzwapovooe-tur52lnkkukeCHANGE_ME62zm.datawarehouse.fabric.microsoft.com"
+      },
+      "Source_Connection_ID": {
         "type": "string"
+      },
+      "Source_Database_Name": {
+        "type": "string",
+        "defaultValue": "DATABASE_NAME"
       }
     },
     "variables": {

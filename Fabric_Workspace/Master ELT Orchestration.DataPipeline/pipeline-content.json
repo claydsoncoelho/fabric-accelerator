@@ -6,7 +6,7 @@
         "typeProperties": {
           "source": {
             "type": "DataWarehouseSource",
-            "sqlReaderStoredProcedureName": "[ELT].[GetIngestionDefinition]",
+            "sqlReaderStoredProcedureName": "[ELT].[GetIngestDefinition]",
             "storedProcedureParameters": {
               "MaxIngestInstance": {
                 "type": "Int32",
@@ -34,13 +34,13 @@
             "type": "DataWarehouseTable",
             "schema": [],
             "linkedService": {
-              "name": "ef04710f_81cd_4203_9cf1_d3e89765a8ad",
+              "name": "72a7554b_0902_47e9_b852_581e873d0faf",
               "properties": {
                 "type": "DataWarehouse",
                 "typeProperties": {
-                  "artifactId": "''",
-                  "endpoint": "CHANGEME",
-                  "workspaceId": "CHANGEME"
+                  "artifactId": "@pipeline().parameters.WH_Control_Name",
+                  "endpoint": "@pipeline().parameters.SQL_Connection_String",
+                  "workspaceId": "@pipeline().DataFactory"
                 },
                 "annotations": []
               }
@@ -208,6 +208,14 @@
                   "WH_Control_Conn_String": {
                     "value": "@item().WH_Control_Conn_String",
                     "type": "Expression"
+                  },
+                  "Source_Connection_ID": {
+                    "value": "@item().Source_Connection_ID",
+                    "type": "Expression"
+                  },
+                  "Source_Database_Name": {
+                    "value": "@item().Source_Database_Name",
+                    "type": "Expression"
                   }
                 },
                 "waitOnCompletion": true
@@ -283,7 +291,7 @@
     "parameters": {
       "SourceSystemName": {
         "type": "string",
-        "defaultValue": "Tech_One"
+        "defaultValue": "System01"
       },
       "StreamName": {
         "type": "string"
@@ -295,6 +303,10 @@
       "WH_Control_Name": {
         "type": "string",
         "defaultValue": "WH_Control"
+      },
+      "SQL_Connection_String": {
+        "type": "string",
+        "defaultValue": "32ebfjmbw6CHANGE-MEeu5br4koaoulq.datawarehouse.fabric.microsoft.com"
       }
     },
     "variables": {

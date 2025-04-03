@@ -1,11 +1,12 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
   "metadata": {
-    "type": "Warehouse",
-    "displayName": "WH_Control"
+    "type": "Notebook",
+    "displayName": "Ingestion_Framework_Deploy",
+    "description": "New notebook"
   },
   "config": {
     "version": "2.0",
-    "logicalId": "1f132b0e-74ae-b093-4210-8b13215d9bf6"
+    "logicalId": "d7df1f07-994d-a685-4731-fba321c807d9"
   }
 }

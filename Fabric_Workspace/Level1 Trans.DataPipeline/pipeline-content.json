@@ -4,7 +4,14 @@
       {
         "name": "Set RunID",
         "type": "SetVariable",
-        "dependsOn": [],
+        "dependsOn": [
+          {
+            "activity": "Wait1",
+            "dependencyConditions": [
+              "Completed"
+            ]
+          }
+        ],
         "policy": {
           "secureOutput": false,
           "secureInput": false
@@ -30,7 +37,7 @@
         ],
         "policy": {
           "timeout": "0.12:00:00",
-          "retry": 0,
+          "retry": 4,
           "retryIntervalInSeconds": 30,
           "secureOutput": false,
           "secureInput": false
@@ -51,7 +58,7 @@
                 "value": "@pipeline().parameters.L1TransformInstanceID",
                 "type": "Expression"
               },
-              "type": "Int32"
+              "type": "String"
             },
             "L1TransformStatus": {
               "value": "Running",
@@ -92,7 +99,7 @@
         ],
         "policy": {
           "timeout": "0.12:00:00",
-          "retry": 0,
+          "retry": 4,
           "retryIntervalInSeconds": 30,
           "secureOutput": false,
           "secureInput": false
@@ -112,7 +119,7 @@
                 "value": "@pipeline().parameters.L1TransformInstanceID",
                 "type": "Expression"
               },
-              "type": "int"
+              "type": "string"
             },
             "L1TransformID": {
               "value": {
@@ -304,7 +311,7 @@
         ],
         "policy": {
           "timeout": "0.12:00:00",
-          "retry": 0,
+          "retry": 4,
           "retryIntervalInSeconds": 30,
           "secureOutput": false,
           "secureInput": false
@@ -339,7 +346,7 @@
                 "value": "@pipeline().parameters.L1TransformInstanceID",
                 "type": "Expression"
               },
-              "type": "Int32"
+              "type": "String"
             },
             "L1TransformStatus": {
               "value": "Success",
@@ -463,7 +470,7 @@
         ],
         "policy": {
           "timeout": "0.12:00:00",
-          "retry": 0,
+          "retry": 4,
           "retryIntervalInSeconds": 30,
           "secureOutput": false,
           "secureInput": false
@@ -484,7 +491,7 @@
                 "value": "@pipeline().parameters.L1TransformInstanceID",
                 "type": "Expression"
               },
-              "type": "Int32"
+              "type": "String"
             },
             "L1TransformStatus": {
               "value": "Failure",
@@ -534,12 +541,23 @@
             "type": "Expression"
           }
         }
+      },
+      {
+        "name": "Wait1",
+        "type": "Wait",
+        "dependsOn": [],
+        "typeProperties": {
+          "waitTimeInSeconds": {
+            "value": "@rand(0,8)",
+            "type": "Expression"
+          }
+        }
       }
     ],
     "parameters": {
       "L1TransformInstanceID": {
-        "type": "int",
-        "defaultValue": 5
+        "type": "string",
+        "defaultValue": "065CHANGE_MEC7196FBB9E4DC0DC21FA48610B4491F6036CFC6DED4E502EE"
       },
       "L1TransformID": {
         "type": "int",
@@ -551,7 +569,7 @@
       },
       "ComputeName": {
         "type": "string",
-        "defaultValue": "252a2b74-0b66-4bb9-ba94-9d88bd82d197"
+        "defaultValue": "CHANGE-ME-45f4-b5ff-d3fb9e718464"
       },
       "ComputePath": {
         "type": "string"
@@ -565,11 +583,11 @@
       },
       "InputRawFileFolder": {
         "type": "string",
-        "defaultValue": "raw-bronze/wwi/Customers/1900-01"
+        "defaultValue": "raw_bronze/SYSTEM_NAME/dbo/TABLE_NAME/1900-01"
       },
       "InputRawFile": {
         "type": "string",
-        "defaultValue": "Customers_1900-01-01_000000.parquet"
+        "defaultValue": "dbo_TABLE_NAME_1900-01-01_000000.parquet"
       },
       "InputRawFileDelimiter": {
         "type": "string"
@@ -579,13 +597,16 @@
         "defaultValue": false
       },
       "OutputL1CurateFileSystem": {
-        "type": "string"
+        "type": "string",
+        "defaultValue": "Not Applicable"
       },
       "OutputL1CuratedFolder": {
-        "type": "string"
+        "type": "string",
+        "defaultValue": "Not Applicable"
       },
       "OutputL1CuratedFile": {
-        "type": "string"
+        "type": "string",
+        "defaultValue": "Not Applicable"
       },
       "OutputL1CuratedFileDelimiter": {
         "type": "string"
@@ -601,19 +622,18 @@
       },
       "LookupColumns": {
         "type": "string",
-        "defaultValue": "CustomerID"
+        "defaultValue": "KEY01|KEY02"
       },
       "OutputDWTable": {
         "type": "string",
-        "defaultValue": "silver.Customers"
+        "defaultValue": "TABLE_NAME"
       },
       "OutputDWTableWriteMode": {
         "type": "string",
         "defaultValue": "append"
       },
       "ReRunL1TransformFlag": {
-        "type": "bool",
-        "defaultValue": false
+        "type": "bool"
       },
       "MaxRetries": {
         "type": "int",
@@ -623,13 +643,16 @@
         "type": "string"
       },
       "BronzeWorkspaceID": {
-        "type": "string"
+        "type": "string",
+        "defaultValue": "2ddd239d-CHANGE-ME-bac0-fb71ecffdacb"
       },
       "WH_Control_Name": {
-        "type": "string"
+        "type": "string",
+        "defaultValue": "WH_Control"
       },
       "WH_Control_Conn_String": {
-        "type": "string"
+        "type": "string",
+        "defaultValue": "7cvmx6CHANGE_MEovooe-turCHANGE_ME7ny6z762zm.datawarehouse.fabric.microsoft.com"
       }
     },
     "variables": {

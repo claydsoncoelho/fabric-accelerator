@@ -23,7 +23,7 @@
 # MAGIC %%configure
 # MAGIC {
 # MAGIC     "defaultLakehouse": {
-# MAGIC         "name": "LH_Bronze_Tech_one"
+# MAGIC         "name": "LH_Bronze_System01"
 # MAGIC     }
 # MAGIC }
 
