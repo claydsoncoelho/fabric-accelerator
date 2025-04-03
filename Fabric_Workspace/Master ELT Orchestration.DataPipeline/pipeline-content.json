@@ -291,7 +291,7 @@
     "parameters": {
       "SourceSystemName": {
         "type": "string",
-        "defaultValue": "Tech_One"
+        "defaultValue": "System01"
       },
       "StreamName": {
         "type": "string"
@@ -306,7 +306,7 @@
       },
       "SQL_Connection_String": {
         "type": "string",
-        "defaultValue": "7cvmCHANGE_MEovooe-dkCHANGE_MEokj7wsbha.datawarehouse.fabric.microsoft.com"
+        "defaultValue": "32ebfjmbw6CHANGE-MEeu5br4koaoulq.datawarehouse.fabric.microsoft.com"
       }
     },
     "variables": {

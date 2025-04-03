@@ -26,18 +26,10 @@
 # CELL ********************
 
 # MAGIC %%sql
+# MAGIC 
 # MAGIC CREATE SCHEMA ELT;
-
-# METADATA ********************
-
-# META {
-# META   "language": "sparksql",
-# META   "language_group": "synapse_pyspark"
-# META }
-
-# CELL ********************
-
-# MAGIC %%sql
+# MAGIC 
+# MAGIC GO;
 # MAGIC 
 # MAGIC CREATE TABLE [ELT].[IngestDefinition] (
 # MAGIC 
@@ -78,7 +70,7 @@
 # MAGIC 	[ModifiedTimestamp] datetime2(6) NULL, 
 # MAGIC 	[BronzeLakehouseID] varchar(128) NULL, 
 # MAGIC 	[WH_Control_Conn_String] varchar(255) NULL,
-# MAGIC 	[Source_Connection_Name] varchar(255) NULL,
+# MAGIC 	[Source_Connection_ID] varchar(255) NULL,
 # MAGIC 	[Source_Database_Name] varchar(255) NULL
 # MAGIC );
 # MAGIC 
@@ -345,7 +337,7 @@
 # MAGIC 				, NULL AS [ADFPipelineRunID]
 # MAGIC 				, [BronzeLakehouseID]
 # MAGIC 				, [WH_Control_Conn_String]
-# MAGIC 				, [Source_Connection_Name] 
+# MAGIC 				, [Source_Connection_ID] 
 # MAGIC 				, [Source_Database_Name] 
 # MAGIC 			FROM 
 # MAGIC 				[ELT].[IngestDefinition]
@@ -430,7 +422,7 @@
 # MAGIC 				, II.[ADFIngestPipelineRunID]
 # MAGIC 				, ID.[BronzeLakehouseID]
 # MAGIC 				, ID.[WH_Control_Conn_String]
-# MAGIC 				, ID.[Source_Connection_Name] 
+# MAGIC 				, ID.[Source_Connection_ID] 
 # MAGIC 				, ID.[Source_Database_Name] 
 # MAGIC 			FROM 
 # MAGIC 				[ELT].[IngestDefinition] ID
@@ -467,6 +459,7 @@
 # MAGIC 		@IngestID int, 
 # MAGIC 		@DeltaDate datetime = null 			
 # MAGIC AS
+# MAGIC BEGIN
 # MAGIC 	--declare @IngestID int 
 # MAGIC 	DECLARE @localdate datetime	= CONVERT(datetime,CONVERT(datetimeoffset, getdate()) AT TIME ZONE 'AUS Eastern Standard Time')
 # MAGIC 	DECLARE @CuratedDate datetime
@@ -535,9 +528,10 @@
 # MAGIC 			TD.[IngestID] = @IngestID and 
 # MAGIC 			TD.[ActiveFlag] = 1 
 # MAGIC 			and ID.[ActiveFlag] = 1 
-# MAGIC 			and ID.[L1TransformationReqdFlag] =1;
+# MAGIC 			and ID.[L1TransformationReqdFlag] =1
+# MAGIC END;
 # MAGIC 
-# MAGIC 
+# MAGIC GO;
 # MAGIC ----------------------------------------------------------------------------------------------------------------
 # MAGIC -- GetTransformInstance_L1
 # MAGIC ----------------------------------------------------------------------------------------------------------------
@@ -594,7 +588,7 @@
 # MAGIC     ORDER BY L1TI.[L1TransformInstanceID] ASC
 # MAGIC END;
 # MAGIC 
-# MAGIC 
+# MAGIC GO;
 # MAGIC 
 # MAGIC ----------------------------------------------------------------------------------------------------------------
 # MAGIC -- InsertIngestInstance
@@ -709,6 +703,7 @@
 # MAGIC 	END
 # MAGIC END;
 # MAGIC 
+# MAGIC GO;
 # MAGIC 
 # MAGIC ----------------------------------------------------------------------------------------------------------------
 # MAGIC -- InsertTransformInstance_L1
@@ -879,7 +874,7 @@
 # MAGIC 		END
 # MAGIC END;
 # MAGIC 
-# MAGIC 
+# MAGIC GO;
 # MAGIC 
 # MAGIC ----------------------------------------------------------------------------------------------------------------
 # MAGIC -- UpdateIngestDefinition
@@ -934,7 +929,7 @@
 # MAGIC 	WHERE [IngestID]=@IngestID
 # MAGIC END;
 # MAGIC 
-# MAGIC 
+# MAGIC GO;
 # MAGIC 
 # MAGIC ----------------------------------------------------------------------------------------------------------------
 # MAGIC -- UpdateIngestInstance
@@ -981,6 +976,7 @@
 # MAGIC 		ADFIngestPipelineRunID =@ADFIngestPipelineRunID
 # MAGIC END;
 # MAGIC 
+# MAGIC GO;
 # MAGIC 
 # MAGIC ----------------------------------------------------------------------------------------------------------------
 # MAGIC -- UpdateIngestInstance
@@ -1072,29 +1068,36 @@
 # CELL ********************
 
 # MAGIC %%sql
-# MAGIC --------------------------------------------------------------------------------------------------------------------------------
+# MAGIC -------------------------------------------------------------------------------------------------------------------------------
 # MAGIC -- REPLACE YOUR SOURCE TABLES AND FABRIC OBJECTS HERE
 # MAGIC --------------------------------------------------------------------------------------------------------------------------------
 # MAGIC 
 # MAGIC SELECT *
 # MAGIC INTO ELT.Z_Source_Metadata
 # MAGIC FROM (
-# MAGIC     SELECT 'dbo' AS Schema_Name, 'TABLE A'    AS Table_Name, 'KEY1|KEY2|KEY3'	AS primary_key, 'LAST_MOD_DATE'	AS WatermarkColName UNION
-# MAGIC 	SELECT 'dbo' AS Schema_Name, 'TABLE B'    AS Table_Name, 'KEY1'				AS primary_key, 'UPDATED_AT'	AS WatermarkColName UNION
-# MAGIC 	SELECT 'dbo' AS Schema_Name, 'TABLE C'    AS Table_Name, 'KEY1|KEY2'		AS primary_key, 'LAST_MOD_DATE'	AS WatermarkColName 
+# MAGIC     SELECT 'dbo' AS Schema_Name, 'Customers'	AS Table_Name, 'CustomerID'		AS primary_key, NULL	AS WatermarkColName UNION
+# MAGIC 	SELECT 'dbo' AS Schema_Name, 'Orders'		AS Table_Name, 'OrderID'		AS primary_key, NULL	AS WatermarkColName UNION
+# MAGIC 	SELECT 'dbo' AS Schema_Name, 'Products'		AS Table_Name, 'ProductID'		AS primary_key, NULL	AS WatermarkColName UNION
+# MAGIC 	SELECT 'dbo' AS Schema_Name, 'OrderDetails'	AS Table_Name, 'OrderDetailID'	AS primary_key, NULL	AS WatermarkColName UNION
+# MAGIC 	SELECT 'dbo' AS Schema_Name, 'Categories'	AS Table_Name, 'CategoryID'		AS primary_key, NULL	AS WatermarkColName UNION
+# MAGIC 	SELECT 'dbo' AS Schema_Name, 'Suppliers'	AS Table_Name, 'SupplierID'		AS primary_key, NULL	AS WatermarkColName UNION
+# MAGIC 	SELECT 'dbo' AS Schema_Name, 'Employees'	AS Table_Name, 'EmployeeID'		AS primary_key, NULL	AS WatermarkColName UNION
+# MAGIC 	SELECT 'dbo' AS Schema_Name, 'Payments'		AS Table_Name, 'PaymentID'		AS primary_key, NULL	AS WatermarkColName UNION
+# MAGIC 	SELECT 'dbo' AS Schema_Name, 'Shippers'		AS Table_Name, 'ShipperID'		AS primary_key, NULL	AS WatermarkColName UNION
+# MAGIC 	SELECT 'dbo' AS Schema_Name, 'Inventory'	AS Table_Name, 'ProductID'		AS primary_key, NULL	AS WatermarkColName 
 # MAGIC ) A;
 # MAGIC 
 # MAGIC SELECT *
 # MAGIC INTO ELT.Z_Fabric_Metadata
 # MAGIC FROM (SELECT 
-# MAGIC     '1ca0ad73-CHANGE ME-d3fb9e718464' as L1NotebookID, 
-# MAGIC     '6c764493-CHANGE ME-fe14afd70ea9' as BronzeLakehouseID,
-# MAGIC     '7cvmx6CHANGE MEzwapovooe-tur52lnkkuCHANGE MEdatawarehouse.fabric.microsoft.com' AS WH_Control_Conn_String,
-# MAGIC     'GENERIC SOURCE SYSTEM NAME' as SourceSystemName,
-# MAGIC     'GENERIC SOURCE SYSTEM NAME data comming from CHANGE ME database.' as SourceSystemDescription,
+# MAGIC     '091ac07b-CHANGE-ME-a8f7-12c4de6e85d9' as L1NotebookID, 
+# MAGIC     'eb012223-CHANGE-ME-bae2-00269b7ed3e9' as BronzeLakehouseID,
+# MAGIC     '32ebfCHANGE-MEaoulq.datawarehouse.fabric.microsoft.com' AS WH_Control_Conn_String,
+# MAGIC     'System01' as SourceSystemName,
+# MAGIC     'System01 data comming from db_test database.' as SourceSystemDescription,
 # MAGIC     'SQL Server' as Backend, 
-# MAGIC     'Fabric_SERVER_NAME_DATABASE_NAME' as Source_Connection_Name, 
-# MAGIC     'DATABASE_NAME' as Source_Database_Name 
+# MAGIC     '8e5b0672-CHANGE-ME-b2d4-154b88d9dd9b' as Source_Connection_ID, 
+# MAGIC     'db_test' as Source_Database_Name 
 # MAGIC ) B;
 # MAGIC 
 # MAGIC --------------------------------------------------------------------------------------------------------------------------------
@@ -1150,7 +1153,7 @@
 # MAGIC 	source.[ModifiedTimestamp],
 # MAGIC 	source.[BronzeLakehouseID],
 # MAGIC 	source.[WH_Control_Conn_String],
-# MAGIC     source.[Source_Connection_Name],
+# MAGIC     source.[Source_Connection_ID],
 # MAGIC     source.[Source_Database_Name]
 # MAGIC FROM (
 # MAGIC 	SELECT
@@ -1191,7 +1194,7 @@
 # MAGIC 		CAST(GETDATE() AS datetime2(6)) AS [ModifiedTimestamp],
 # MAGIC 		Z_Meta.BronzeLakehouseID, 
 # MAGIC 		Z_Meta.WH_Control_Conn_String,
-# MAGIC         Z_Meta.Source_Connection_Name,
+# MAGIC         Z_Meta.Source_Connection_ID,
 # MAGIC         Z_Meta.Source_Database_Name
 # MAGIC 
 # MAGIC 	FROM ELT.Z_Meta

@@ -20,7 +20,7 @@
 
 # CELL ********************
 
-BronzeLakehouseName = "LH_Bronze_Tech_One"
+BronzeLakehouseName = "LH_Bronze_System01"
 
 # METADATA ********************
 

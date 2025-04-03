@@ -83,7 +83,14 @@
       {
         "name": "Set RunID",
         "type": "SetVariable",
-        "dependsOn": [],
+        "dependsOn": [
+          {
+            "activity": "Wait1",
+            "dependencyConditions": [
+              "Completed"
+            ]
+          }
+        ],
         "policy": {
           "secureOutput": false,
           "secureInput": false
@@ -223,7 +230,10 @@
             "type": "SqlServerTable",
             "schema": [],
             "typeProperties": {
-              "database": "@pipeline().parameters.Source_Database_Name"
+              "database": {
+                "value": "@pipeline().parameters.Source_Database_Name",
+                "type": "Expression"
+              }
             },
             "externalReferences": {
               "connection": "@pipeline().parameters.Source_Connection_ID"
@@ -694,6 +704,17 @@
               "artifactId": "@pipeline().parameters.WH_Control_Name",
               "workspaceId": "@pipeline().parameters.BronzeWorkspaceID"
             }
+          }
+        }
+      },
+      {
+        "name": "Wait1",
+        "type": "Wait",
+        "dependsOn": [],
+        "typeProperties": {
+          "waitTimeInSeconds": {
+            "value": "@rand(0,8)",
+            "type": "Expression"
           }
         }
       }
