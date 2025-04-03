@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "Master ELT Orchestration"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "588f9ac9-79fd-bb41-4e48-97998689eb1b"
+  }
+}

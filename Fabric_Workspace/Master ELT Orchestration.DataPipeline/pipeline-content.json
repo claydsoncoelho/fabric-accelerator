@@ -1,0 +1,321 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "type": "Lookup",
+        "typeProperties": {
+          "source": {
+            "type": "DataWarehouseSource",
+            "sqlReaderStoredProcedureName": "[ELT].[GetIngestDefinition]",
+            "storedProcedureParameters": {
+              "MaxIngestInstance": {
+                "type": "Int32",
+                "value": "100"
+              },
+              "SourceSystemName": {
+                "type": "String",
+                "value": {
+                  "value": "@pipeline().parameters.SourceSystemName",
+                  "type": "Expression"
+                }
+              },
+              "StreamName": {
+                "type": "String",
+                "value": {
+                  "value": "@pipeline().parameters.StreamName",
+                  "type": "Expression"
+                }
+              }
+            },
+            "partitionOption": "None",
+            "queryTimeout": "02:00:00"
+          },
+          "datasetSettings": {
+            "type": "DataWarehouseTable",
+            "schema": [],
+            "linkedService": {
+              "name": "72a7554b_0902_47e9_b852_581e873d0faf",
+              "properties": {
+                "type": "DataWarehouse",
+                "typeProperties": {
+                  "artifactId": "@pipeline().parameters.WH_Control_Name",
+                  "endpoint": "@pipeline().parameters.SQL_Connection_String",
+                  "workspaceId": "@pipeline().DataFactory"
+                },
+                "annotations": []
+              }
+            },
+            "annotations": []
+          },
+          "firstRowOnly": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Get SQL Tables to Ingest",
+        "dependsOn": []
+      },
+      {
+        "type": "ForEach",
+        "typeProperties": {
+          "isSequential": false,
+          "batchCount": 4,
+          "items": {
+            "value": "@activity('Get SQL Tables to Ingest').output.value",
+            "type": "Expression"
+          },
+          "activities": [
+            {
+              "type": "ExecutePipeline",
+              "typeProperties": {
+                "pipeline": {
+                  "referenceName": "7140d13f-3d1c-ad8b-4760-ad89c0805811",
+                  "type": "PipelineReference"
+                },
+                "parameters": {
+                  "IngestID": {
+                    "value": "@item().IngestID",
+                    "type": "Expression"
+                  },
+                  "SourceSystemName": {
+                    "value": "@item().SourceSystemName",
+                    "type": "Expression"
+                  },
+                  "StreamName": {
+                    "value": "@item().StreamName",
+                    "type": "Expression"
+                  },
+                  "EntityName": {
+                    "value": "@item().EntityName",
+                    "type": "Expression"
+                  },
+                  "WatermarkColName": {
+                    "value": "@item().WatermarkColName",
+                    "type": "Expression"
+                  },
+                  "LastDeltaDate": {
+                    "value": "@item().LastDeltaDate",
+                    "type": "Expression"
+                  },
+                  "DataFromTimestamp": {
+                    "value": "@item().DataFromTimestamp",
+                    "type": "Expression"
+                  },
+                  "DataToTimestamp": {
+                    "value": "@item().DataToTimestamp",
+                    "type": "Expression"
+                  },
+                  "LastDeltaNumber": {
+                    "value": "@item().LastDeltaNumber",
+                    "type": "Expression"
+                  },
+                  "DataFromNumber": {
+                    "value": "@item().DataFromNumber",
+                    "type": "Expression"
+                  },
+                  "DataToNumber": {
+                    "value": "@item().DataToNumber",
+                    "type": "Expression"
+                  },
+                  "DataFormat": {
+                    "value": "@item().DataFormat",
+                    "type": "Expression"
+                  },
+                  "SourceStructure": {
+                    "value": "@item().SourceStructure",
+                    "type": "Expression"
+                  },
+                  "MaxIntervalMinutes": {
+                    "value": "@item().MaxIntervalMinutes",
+                    "type": "Expression"
+                  },
+                  "MaxIntervalNumber": {
+                    "value": "@item().MaxIntervalNumber",
+                    "type": "Expression"
+                  },
+                  "DataMapping": {
+                    "value": "@item().DataMapping",
+                    "type": "Expression"
+                  },
+                  "RunSequence": {
+                    "value": "@item().RunSequence",
+                    "type": "Expression"
+                  },
+                  "ActiveFlag": {
+                    "value": "@item().ActiveFlag",
+                    "type": "Expression"
+                  },
+                  "L1TransformationReqdFlag": {
+                    "value": "@item().L1TransformationReqdFlag",
+                    "type": "Expression"
+                  },
+                  "L2TransformationReqdFlag": {
+                    "value": "@item().L2TransformationReqdFlag",
+                    "type": "Expression"
+                  },
+                  "DelayL1TransformationFlag": {
+                    "value": "@item().DelayL1TransformationFlag",
+                    "type": "Expression"
+                  },
+                  "DelayL2TransformationFlag": {
+                    "value": "@item().DelayL2TransformationFlag",
+                    "type": "Expression"
+                  },
+                  "DestinationRawFileSystem": {
+                    "value": "@item().DestinationRawFileSystem",
+                    "type": "Expression"
+                  },
+                  "DestinationRawFolder": {
+                    "value": "@item().DestinationRawFolder",
+                    "type": "Expression"
+                  },
+                  "DestinationRawFile": {
+                    "value": "@item().DestinationRawFile",
+                    "type": "Expression"
+                  },
+                  "SourceSQL": {
+                    "value": "@item().SourceSQL",
+                    "type": "Expression"
+                  },
+                  "StatSQL": {
+                    "value": "@item().StatSQL",
+                    "type": "Expression"
+                  },
+                  "ReloadFlag": {
+                    "value": "@item().ReloadFlag",
+                    "type": "Expression"
+                  },
+                  "ADFPipelineRunID": {
+                    "value": "@item().ADFPipelineRunID",
+                    "type": "Expression"
+                  },
+                  "BronzeObjectID": {
+                    "value": "@item().BronzeLakehouseID",
+                    "type": "Expression"
+                  },
+                  "BronzeWorkspaceID": {
+                    "value": "@pipeline().DataFactory",
+                    "type": "Expression"
+                  },
+                  "WH_Control_Name": {
+                    "value": "@pipeline().parameters.WH_Control_Name",
+                    "type": "Expression"
+                  },
+                  "WH_Control_Conn_String": {
+                    "value": "@item().WH_Control_Conn_String",
+                    "type": "Expression"
+                  },
+                  "Source_Connection_ID": {
+                    "value": "@item().Source_Connection_ID",
+                    "type": "Expression"
+                  },
+                  "Source_Database_Name": {
+                    "value": "@item().Source_Database_Name",
+                    "type": "Expression"
+                  }
+                },
+                "waitOnCompletion": true
+              },
+              "policy": {
+                "secureInput": false
+              },
+              "name": "Ingest Table",
+              "dependsOn": []
+            }
+          ]
+        },
+        "name": "ForEach SQL Table",
+        "dependsOn": [
+          {
+            "activity": "Get SQL Tables to Ingest",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "ExecutePipeline",
+        "typeProperties": {
+          "pipeline": {
+            "referenceName": "f09bc1ae-079a-b0e9-4471-5f57b721d522",
+            "type": "PipelineReference"
+          },
+          "parameters": {
+            "SourceSystemName": {
+              "value": "@pipeline().parameters.SourceSystemName",
+              "type": "Expression"
+            },
+            "StreamName": {
+              "value": "@pipeline().parameters.StreamName",
+              "type": "Expression"
+            },
+            "MaxTransformInstance": 100,
+            "DelayL1TransformationFlag": {
+              "value": "@pipeline().parameters.DelayTransformation",
+              "type": "Expression"
+            },
+            "BronzeWorkspaceID": {
+              "value": "@pipeline().DataFactory",
+              "type": "Expression"
+            },
+            "WH_Control_Name": {
+              "value": "@pipeline().parameters.WH_Control_Name",
+              "type": "Expression"
+            },
+            "WH_Control_Conn_String": {
+              "value": "@activity('Get SQL Tables to Ingest').output.value[0].WH_Control_Conn_String",
+              "type": "Expression"
+            }
+          },
+          "waitOnCompletion": true
+        },
+        "policy": {
+          "secureInput": false
+        },
+        "name": "Level 1 Transform SILVER",
+        "dependsOn": [
+          {
+            "activity": "ForEach SQL Table",
+            "dependencyConditions": [
+              "Completed"
+            ]
+          }
+        ]
+      }
+    ],
+    "parameters": {
+      "SourceSystemName": {
+        "type": "string",
+        "defaultValue": "Tech_One"
+      },
+      "StreamName": {
+        "type": "string"
+      },
+      "DelayTransformation": {
+        "type": "int",
+        "defaultValue": 0
+      },
+      "WH_Control_Name": {
+        "type": "string",
+        "defaultValue": "WH_Control"
+      },
+      "SQL_Connection_String": {
+        "type": "string",
+        "defaultValue": "7cvmCHANGE_MEovooe-dkCHANGE_MEokj7wsbha.datawarehouse.fabric.microsoft.com"
+      }
+    },
+    "variables": {
+      "number": {
+        "type": "Integer"
+      },
+      "numbers": {
+        "type": "String"
+      }
+    }
+  }
+}
