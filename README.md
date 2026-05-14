@@ -31,7 +31,11 @@ During the setup of this framework, you will perform 3 main steps:
 Follow these steps to setup Microsoft Fabric Accelerator:
 
 1. In Azure DevOps, create a repo and upload the content of **Fabric_Workspace** folder to it.
-2. In Fabric, create a **Workspace** and link it to the Azure DevOps repo.
+- `git clone --branch sandbox https://citi-bike@dev.azure.com/citi-bike/citi_bike_fabric/_git/citi_bike_fabric`
+- `git add .`
+- `git commit -m "Initial commit"`
+- `git push -u origin sandbox`
+2.In Fabric, create a **Workspace** and link it to the Azure DevOps repo.
 3. Create a Fabric **Lakehouse** to be be the landing zone (bronze layer) of the Data Platform. Take note of the Lakehouse ID. You will need it later.
 4. Open **L1Transform-Generic-Fabric** Notebook and adjust the **defaultLakehouse** parameter with the name of the bronze Lakehouse that you've just created. Also, take note of the this Notebook ID. You will need it later.
 5. Open **Utils_DeltaLakeFunctions** Notebook and adjust the **BronzeLakehouseName** parameter with the name of the bronze Lakehouse that you've just created.
