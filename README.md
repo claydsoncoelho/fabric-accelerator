@@ -55,3 +55,5 @@ The information that you will need to populate those tables is:
     - **Source_Database_Name:** The name o the source database.
     - General information about the **source tables** to be ingested (Schema, Table Name, Primery Key and Watermark column(optional)).
 10. Open **Master ELT Orchestration** Pipeline, change its parameters accordingly and run it to test the ingestion process.
+    - SQL_Connection_String = SQL Endpoint of WH_Control. (32ebfjchange-meb6qekfm-change-me.datawarehouse.fabric.microsoft.com)
+12. End
