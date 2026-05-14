@@ -35,13 +35,15 @@ Follow these steps to setup Microsoft Fabric Accelerator:
 - `git add .`
 - `git commit -m "Initial commit"`
 - `git push -u origin sandbox`
-2.In Fabric, create a **Workspace** and link it to the Azure DevOps repo.
-3. Create a Fabric **Lakehouse** to be be the landing zone (bronze layer) of the Data Platform. Take note of the Lakehouse ID. You will need it later.
-4. Open **L1Transform-Generic-Fabric** Notebook and adjust the **defaultLakehouse** parameter with the name of the bronze Lakehouse that you've just created. Also, take note of the this Notebook ID. You will need it later.
-5. Open **Utils_DeltaLakeFunctions** Notebook and adjust the **BronzeLakehouseName** parameter with the name of the bronze Lakehouse that you've just created.
-6. Create a connection to the source system. Take note of the Connetion ID. You will need it later.
-7. Create a Warehouse, usually WH_Control, to be the configuration database of the Ingestion Framework. 
-8. Follow the steps in **Ingestion_Framework_Deploy** Notebook to deploy the tables and stored procedures of WH_Control.
+
+2. In Fabric, create a **Workspace** and link it to the Azure DevOps repo.
+3. In Workspace, create folders to organize the objects (Pipelines, Noteboks, Lakehouses, etc.).
+4. Create a Fabric **Lakehouse** to be be the landing zone (bronze layer) of the Data Platform. Take note of the Lakehouse ID. You will need it later.
+5. Open **L1Transform-Generic-Fabric** Notebook and adjust the **defaultLakehouse** parameter with the name of the bronze Lakehouse that you've just created. Also, take note of the this Notebook ID. You will need it later.
+6. Open **Utils_DeltaLakeFunctions** Notebook and adjust the **BronzeLakehouseName** parameter with the name of the bronze Lakehouse that you've just created.
+7. Create a connection to the source system. Take note of the Connetion ID. You will need it later.
+8. Create a Warehouse, usually WH_Control, to be the configuration database of the Ingestion Framework. 
+9. Follow the steps in **Ingestion_Framework_Deploy** Notebook to deploy the tables and stored procedures of WH_Control.
 The information that you will need to populate those tables is:
     - **L1NotebookID:** L1Transform-Generic-Fabric Notebook ID.
     - **BronzeLakehouseID:** Lakehouse ID of the bronze Lakehouse that you created.
@@ -52,4 +54,4 @@ The information that you will need to populate those tables is:
     - **Source_Connection_ID:** The ID of the connection to the source system
     - **Source_Database_Name:** The name o the source database.
     - General information about the **source tables** to be ingested (Schema, Table Name, Primery Key and Watermark column(optional)).
-9. Open **Master ELT Orchestration** Pipeline, change its parameters accordingly and run it to test the ingestion process.
+10. Open **Master ELT Orchestration** Pipeline, change its parameters accordingly and run it to test the ingestion process.
